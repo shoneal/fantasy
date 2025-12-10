@@ -119,6 +119,14 @@ const players = {
             cleanSheet: [true, 4],
             saves: [4, 1],
           },
+          14: {
+            teams: ["Торино", "Милан"],
+            result: "2-3",
+            minutesOnField: [90, 2],
+            missedGoals: [2, -1],
+            saves: [2, 0],
+            yellowCard: [1, -1],
+          },
         },
       },
     },
@@ -1176,6 +1184,12 @@ const players = {
             result: "0-0",
             minutesOnField: [45, 1],
           },
+          14: {
+            teams: ["Наполи", "Ювентус"],
+            result: "2-1",
+            minutesOnField: [20, 1],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -1243,6 +1257,13 @@ const players = {
             result: "0-2",
             minutesOnField: [73, 2],
             missedGoals: [2, -1],
+          },
+          15: {
+            teams: ["Осасуна", "Леванте"],
+            result: "2-0",
+            minutesOnField: [90, 2],
+            missedGoals: [2, -1],
+            tackles: [undefined, 1],
           },
         },
       },
@@ -2037,6 +2058,11 @@ const players = {
             goals: [1, 5],
             cleanSheet: [true, 1],
           },
+          14: {
+            teams: ["Торино", "Милан"],
+            result: "2-3",
+            minutesOnField: [31, 1],
+          },
         },
       },
     },
@@ -2257,6 +2283,14 @@ const players = {
             fullMatch: [true, 1],
             cleanSheet: [true, 1],
             tackles: [undefined, 3],
+            captain: true,
+          },
+          14: {
+            teams: ["Торино", "Милан"],
+            result: "2-3",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            tackles: [undefined, 1],
             captain: true,
           },
         },
@@ -2958,6 +2992,12 @@ const players = {
             result: "0-2",
             minutesOnField: [90, 2],
             fullMatch: [true, 1],
+          },
+          15: {
+            teams: ["Осасуна", "Леванте"],
+            result: "2-0",
+            minutesOnField: [77, 2],
+            tackles: [undefined, 1],
           },
         },
       },
@@ -4843,7 +4883,7 @@ const leagues = {
     background: "linear-gradient(90deg,#37003c,#953bff)",
     button: "#37003c",
     players: {
-      Камиль: 533,
+      Камиль: 544,
     },
   },
   laLiga: {
@@ -4851,7 +4891,7 @@ const leagues = {
     background: "#ff4b44",
     button: "#ff4b44",
     players: {
-      Камиль: 478,
+      Камиль: 485,
     },
   },
   seriaA: {
@@ -4860,7 +4900,7 @@ const leagues = {
       "url(https://shoneal.github.io/fantasy/images/other/seriA_cover.webp) no-repeat center center / cover",
     button: "#2047e3",
     players: {
-      Камиль: 466,
+      Камиль: 523,
     },
   },
 }; // Данные лиг
