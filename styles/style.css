@@ -8,9 +8,11 @@
   --color-tertiary: #e4e4e3;
   --accent-color: #ff7fde;
   --blue-accent: #085fff;
-  --font-family-primary: "Sofia Sans Extra Condensed Variable",
-    "Sofia Sans Extra Condensed", sans-serif;
-  --font-family-secondary: "Source Sans 3 Variable", "Source Sans 3", sans-serif;
+  --font-family-primary:
+    "Sofia Sans Extra Condensed Variable", "Sofia Sans Extra Condensed",
+    sans-serif;
+  --font-family-secondary:
+    "Source Sans 3 Variable", "Source Sans 3", sans-serif;
   --font-family-table-header: "Inter Tight Variable", "Inter Tight", sans-serif;
   --font-weight-bold: 850;
   --font-weight-medium: 650;
@@ -95,7 +97,6 @@ body::-webkit-scrollbar,
 
 .header_logo {
   object-fit: contain;
-  opacity: 0;
   transition: all 0.3s;
   inline-size: 128px;
   block-size: 128px;
@@ -139,7 +140,6 @@ body::-webkit-scrollbar,
   bottom: -40px;
   z-index: 1;
   object-fit: contain;
-  opacity: 0;
   transition: all 0.3s;
   inline-size: 300px;
   block-size: 300px;
@@ -190,7 +190,6 @@ body::-webkit-scrollbar,
 
 .header_button img {
   object-fit: contain;
-  opacity: 0;
   inline-size: 40px;
   block-size: 40px;
 }
@@ -250,7 +249,6 @@ body::-webkit-scrollbar,
   z-index: 2;
   object-fit: contain;
   object-position: bottom;
-  opacity: 0;
   inline-size: 100%;
   block-size: 100%;
 }
@@ -377,7 +375,9 @@ body::-webkit-scrollbar,
   opacity: 0;
   overflow-y: auto;
   background-color: var(--background-body);
-  transition: visibility 0.5s, opacity 0.5s;
+  transition:
+    visibility 0.5s,
+    opacity 0.5s;
   pointer-events: none;
   user-select: none;
   scrollbar-width: none;
@@ -450,7 +450,6 @@ body::-webkit-scrollbar,
   right: -150px;
   bottom: -40px;
   object-fit: contain;
-  opacity: 0;
   transition: all 0.1s;
   inline-size: 300px;
   block-size: 300px;
@@ -469,7 +468,6 @@ body::-webkit-scrollbar,
 .popup_player_photo {
   object-fit: contain;
   object-position: bottom;
-  opacity: 0;
   transition: all 0.1s;
   max-inline-size: 100%;
   block-size: 100%;
@@ -524,7 +522,6 @@ body::-webkit-scrollbar,
 
 .popup_player_team {
   object-fit: contain;
-  opacity: 0;
   transition: all 0.1s;
   inline-size: 128px;
   block-size: 128px;
@@ -683,7 +680,6 @@ body::-webkit-scrollbar,
 
 .tour_result img {
   object-fit: contain;
-  opacity: 0;
   inline-size: 40px;
   block-size: 40px;
 }
@@ -826,7 +822,6 @@ body::-webkit-scrollbar,
   position: absolute;
   right: 0;
   object-fit: contain;
-  opacity: 0;
   transform: translateX(30%);
   inline-size: auto;
   block-size: 100px;
