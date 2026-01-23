@@ -234,6 +234,26 @@ const players = {
         },
       },
     },
+    milinkovicSavic: {
+      firstName: "Ваня",
+      lastName: "Милинкович-Савич",
+      team: "Наполи",
+      price: {
+        ucl: 4.1,
+      },
+      stats: {
+        ucl: {
+          7: {
+            teams: ["Копенгаген", "Наполи"],
+            result: "1-1",
+            minutesOnField: [90, 2],
+            saves: [3, 1],
+            savingPenalty: [1, 5],
+            missedGoals: [1, 0],
+          },
+        },
+      },
+    },
     oblak: {
       firstName: "Ян",
       lastName: "Облак",
@@ -1055,7 +1075,7 @@ const players = {
       lastName: "Хейсен",
       team: "Реал Мадрид",
       price: {
-        ucl: 4.6,
+        ucl: 4.4,
         laLiga: 6,
       },
       stats: {
@@ -1073,6 +1093,13 @@ const players = {
             minutesOnField: [90, 2],
             cleanSheet: [true, 4],
             tackles: [14, 4],
+          },
+          7: {
+            teams: ["Реал Мадрид", "Монако"],
+            result: "6-1",
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+            tackles: [9, 3],
           },
         },
         laLiga: {
@@ -1511,6 +1538,13 @@ const players = {
             missedGoals: [1, 0],
             tackles: [2, 0],
           },
+          7: {
+            teams: ["Спортинг", "ПСЖ"],
+            result: "2-1",
+            minutesOnField: [90, 2],
+            missedGoals: [2, -1],
+            tackles: [13, 4],
+          },
         },
       },
     },
@@ -1537,6 +1571,13 @@ const players = {
             minutesOnField: [90, 2],
             cleanSheet: [true, 4],
             tackles: [4, 1],
+          },
+          7: {
+            teams: ["Спортинг", "ПСЖ"],
+            result: "2-1",
+            minutesOnField: [90, 2],
+            missedGoals: [2, -1],
+            tackles: [9, 3],
           },
         },
       },
@@ -1803,6 +1844,13 @@ const players = {
             minutesOnField: [73, 2],
             cleanSheet: [true, 4],
             tackles: [2, 0],
+          },
+          7: {
+            teams: ["Интер", "Арсенал"],
+            result: "1-3",
+            minutesOnField: [64, 2],
+            assists: [1, 3],
+            missedGoals: [1, 0],
           },
         },
         pl: {
@@ -2153,6 +2201,13 @@ const players = {
             result: "1-2",
             minutesOnField: [32, 1],
             tackles: [1, 0],
+          },
+          7: {
+            teams: ["Реал Мадрид", "Монако"],
+            result: "6-1",
+            minutesOnField: [76, 2],
+            assists: [1, 3],
+            tackles: [4, 1],
           },
         },
         laLiga: {
@@ -3410,6 +3465,15 @@ const players = {
             assists: [1, 3],
             tackles: [2, 0],
           },
+          7: {
+            teams: ["Бавария", "Юнион"],
+            result: "2-0",
+            minutesOnField: [89, 2],
+            assists: [1, 3],
+            cleanSheet: [true, 1],
+            yellowCard: [1, -1],
+            tackles: [2, 0],
+          },
         },
       },
     },
@@ -3503,6 +3567,15 @@ const players = {
             minutesOnField: [90, 2],
             fullMatch: [true, 1],
             yellowCard: [1, -1],
+            tackles: [undefined, 1],
+          },
+          21: {
+            teams: ["Лацио", "Комо"],
+            result: "0-3",
+            minutesOnField: [90, 2],
+            goals: [2, 10],
+            cleanSheet: [true, 1],
+            missingPenalty: [1, -2],
             tackles: [undefined, 1],
           },
         },
@@ -3907,9 +3980,18 @@ const players = {
       lastName: "Йылдыз",
       team: "Ювентус",
       price: {
+        ucl: 6.8,
         seriaA: 8.5,
       },
       stats: {
+        ucl: {
+          7: {
+            teams: ["Ювентус", "Бенфика"],
+            result: "2-0",
+            minutesOnField: [82, 2],
+            cleanSheet: [true, 1],
+          },
+        },
         seriaA: {
           6: {
             teams: ["Ювентус", "Милан"],
@@ -3976,6 +4058,7 @@ const players = {
             minutesOnField: [62, 2],
             goals: [1, 5],
             cleanSheet: [true, 1],
+            missingPenalty: [1, -2],
           },
           21: {
             teams: ["Кальяри", "Ювентус"],
@@ -4099,6 +4182,25 @@ const players = {
     },
   },
   forwards: {
+    aAdams: {
+      firstName: "Адамс",
+      lastName: "Акор",
+      team: "Севилья",
+      price: {
+        laLiga: 6,
+      },
+      stats: {
+        laLiga: {
+          20: {
+            teams: ["Эльче", "Севилья"],
+            result: "2-2",
+            minutesOnField: [45, 1],
+            goals: [2, 8],
+            tackles: [undefined, 1],
+          },
+        },
+      },
+    },
     alvarez: {
       firstName: "Хулиан",
       lastName: "Альварес",
@@ -4395,12 +4497,6 @@ const players = {
             result: "1-1",
             minutesOnField: [2, 1],
           },
-          20: {
-            teams: ["Реал Мадрид", "Леванте"],
-            result: "2-0",
-            minutesOnField: [66, 2],
-            tackles: [undefined, 1],
-          },
         },
       },
     },
@@ -4599,6 +4695,17 @@ const players = {
             minutesOnField: [88, 2],
             tackles: [2, 0],
           },
+          7: {
+            teams: ["Бавария", "Юнион"],
+            result: "2-0",
+            minutesOnField: [90, 2],
+            goals: [2, 8],
+            missingPenalty: [1, -2],
+            earnedPenalty: [1, 2],
+            tackles: [2, 0],
+            playerOfTheMatch: [true, 3],
+            captain: true,
+          },
         },
       },
     },
@@ -4786,7 +4893,7 @@ const players = {
       lastName: "Мбаппе",
       team: "Реал Мадрид",
       price: {
-        ucl: 10.9,
+        ucl: 11,
         laLiga: 11.5,
       },
       stats: {
@@ -4826,6 +4933,12 @@ const players = {
             outsideTheBox: [1, 1],
             playerOfTheMatch: [true, 3],
             captain: true,
+          },
+          7: {
+            teams: ["Реал Мадрид", "Монако"],
+            result: "6-1",
+            minutesOnField: [90, 2],
+            goals: [2, 8],
           },
         },
         laLiga: {
@@ -6571,11 +6684,11 @@ const leagues = {
     background: "linear-gradient(93.5deg,#0232ff 0.59%,#010056 94.82%)",
     button: "#040a63",
     players: {
-      Камиль: 512,
-      Хидир: 441,
-      Эрик: 392,
-      Карузо: 459,
-      Аскольд: 298,
+      Камиль: 592,
+      Хидир: 516,
+      Эрик: 429,
+      Карузо: 542,
+      Аскольд: 368,
     },
   },
   pl: {
@@ -6600,7 +6713,7 @@ const leagues = {
       "url(https://shoneal.github.io/fantasy/images/other/seriA_cover.webp) no-repeat center center / cover",
     button: "#2047e3",
     players: {
-      Камиль: 914,
+      Камиль: 931,
     },
   },
 }; // Данные лиг
