@@ -2,131 +2,131 @@
   font-family: "Sofia Sans Extra Condensed Variable";
   src: url(./SofiaSansExtraCondensed-VariableFont_wght.ttf) format("truetype");
   font-weight: 400 900;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3 Variable";
   src: url(./SourceSans3-VariableFont_wght.ttf) format("truetype");
   font-weight: 400 900;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Inter Tight Variable";
   src: url(./InterTight-VariableFont_wght.ttf) format("truetype");
   font-weight: 400 900;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Sofia Sans Extra Condensed";
   src: url(./SofiaSansExtraCondensed-Regular.ttf) format("truetype");
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Sofia Sans Extra Condensed";
   src: url(./SofiaSansExtraCondensed-Medium.ttf) format("truetype");
   font-weight: 500;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Sofia Sans Extra Condensed";
   src: url(./SofiaSansExtraCondensed-SemiBold.ttf) format("truetype");
   font-weight: 600;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Sofia Sans Extra Condensed";
   src: url(./SofiaSansExtraCondensed-Bold.ttf) format("truetype");
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Sofia Sans Extra Condensed";
   src: url(./SofiaSansExtraCondensed-ExtraBold.ttf) format("truetype");
   font-weight: 800;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Sofia Sans Extra Condensed";
   src: url(./SofiaSansExtraCondensed-Black.ttf) format("truetype");
   font-weight: 900;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3";
   src: url(./SourceSans3-Regular.ttf) format("truetype");
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3";
   src: url(./SourceSans3-Medium.ttf) format("truetype");
   font-weight: 500;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3";
   src: url(./SourceSans3-SemiBold.ttf) format("truetype");
   font-weight: 600;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3";
   src: url(./SourceSans3-Bold.ttf) format("truetype");
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3";
   src: url(./SourceSans3-ExtraBold.ttf) format("truetype");
   font-weight: 800;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Source Sans 3";
   src: url(./SourceSans3-Black.ttf) format("truetype");
   font-weight: 900;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Inter Tight";
   src: url(./InterTight-Regular.ttf) format("truetype");
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Inter Tight";
   src: url(./InterTight-SemiBold.ttf) format("truetype");
   font-weight: 600;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Inter Tight";
   src: url(./InterTight-ExtraBold.ttf) format("truetype");
   font-weight: 800;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Inter Tight";
   src: url(./InterTight-Black.ttf) format("truetype");
   font-weight: 900;
-  font-display: swap;
+  font-display: block;
 }
