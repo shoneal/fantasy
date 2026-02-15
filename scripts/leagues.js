@@ -1,4 +1,4 @@
-const leagues = {
+export const leagues = {
   ucl: {
     name: "Champions League",
     background: "linear-gradient(93.5deg,#0232ff 0.59%,#010056 94.82%)",

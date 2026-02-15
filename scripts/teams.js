@@ -1,4 +1,4 @@
-const teams = {
+export const teams = {
   "Айнтрахт Франкфурт": "Eintracht_Frankfurt",
   Аякс: "Ajax",
   Арсенал: "Arsenal",

@@ -1,3 +1,9 @@
+import { players } from './players.js';
+import { activeTeams } from './active-teams.js';
+import { teams } from './teams.js';
+import { leagues } from './leagues.js';
+import { terms } from './terms.js';
+
 for (const key in terms) {
   if (terms[key].length >= 4) {
     terms[key][3] =

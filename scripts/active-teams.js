@@ -1,4 +1,4 @@
-const activeTeams = {
+export const activeTeams = {
   Арсенал: {
     color: ["fff", "ef0107"],
     opponents_ucl: [
