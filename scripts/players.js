@@ -352,6 +352,14 @@ export const players = {
             saves: [6, 2],
             missedGoals: [3, -1],
           },
+          10: {
+            teams: ["Атлетико", "Брюгге"],
+            result: "4-1",
+            minutesOnField: [90, 2],
+            assists: [1, 3],
+            saves: [5, 1],
+            missedGoals: [1, 0],
+          },
         },
         laLiga: {
           16: {
@@ -1438,6 +1446,14 @@ export const players = {
             missedGoals: [2, -1],
             tackles: [2, 0],
           },
+          10: {
+            teams: ["ПСЖ", "Монако"],
+            result: "2-2",
+            minutesOnField: [90, 2],
+            assists: [1, 3],
+            missedGoals: [2, -1],
+            tackles: [3, 1],
+          },
         },
       },
     },
@@ -2053,6 +2069,13 @@ export const players = {
             missedGoals: [1, 0],
             tackles: [8, 2],
           },
+          10: {
+            teams: ["ПСЖ", "Монако"],
+            result: "2-2",
+            minutesOnField: [80, 2],
+            missedGoals: [1, 0],
+            tackles: [4, 1],
+          },
         },
       },
     },
@@ -2100,6 +2123,13 @@ export const players = {
             minutesOnField: [90, 2],
             missedGoals: [2, -1],
             tackles: [6, 2],
+          },
+          10: {
+            teams: ["ПСЖ", "Монако"],
+            result: "2-2",
+            minutesOnField: [90, 2],
+            missedGoals: [2, -1],
+            tackles: [7, 2],
           },
         },
       },
@@ -3566,6 +3596,12 @@ export const players = {
             minutesOnField: [90, 2],
             tackles: [7, 2],
           },
+          10: {
+            teams: ["Атлетико", "Брюгге"],
+            result: "4-1",
+            minutesOnField: [83, 2],
+            tackles: [2, 0],
+          },
         },
         laLiga: {
           15: {
@@ -3775,6 +3811,14 @@ export const players = {
             minutesOnField: [80, 2],
             tackles: [2, 0],
           },
+          10: {
+            teams: ["Ювентус", "Галатасарай"],
+            result: "3-2",
+            minutesOnField: [77, 2],
+            cleanSheet: [true, 1],
+            earnedPenalty: [1, 2],
+            tackles: [2, 0],
+          },
         },
         seriaA: {
           6: {
@@ -3914,6 +3958,14 @@ export const players = {
             minutesOnField: [69, 2],
             earnedPenalty: [1, 2],
             tackles: [1, 0],
+          },
+          10: {
+            teams: ["ПСЖ", "Монако"],
+            result: "2-2",
+            minutesOnField: [90, 2],
+            goals: [1, 5],
+            tackles: [4, 1],
+            captain: true,
           },
         },
       },
@@ -5147,6 +5199,14 @@ export const players = {
             minutesOnField: [82, 2],
             cleanSheet: [true, 1],
           },
+          10: {
+            teams: ["Ювентус", "Галатасарай"],
+            result: "3-2",
+            minutesOnField: [103, 2],
+            cleanSheet: [true, 1],
+            yellowCard: [1, -1],
+            tackles: [2, 0],
+          },
         },
         seriaA: {
           6: {
@@ -5342,6 +5402,12 @@ export const players = {
             teams: ["Буде-Глимт", "Интер"],
             result: "3-1",
             minutesOnField: [14, 1],
+            tackles: [3, 1],
+          },
+          10: {
+            teams: ["Интер", "Буде-Глимт"],
+            result: "1-2",
+            minutesOnField: [62, 2],
             tackles: [3, 1],
           },
         },
@@ -5578,68 +5644,6 @@ export const players = {
         },
       },
     },
-    jDavid: {
-      firstName: "Джонатан",
-      lastName: "Дэвид",
-      team: "Ювентус",
-      price: {
-        seriaA: 9,
-      },
-      stats: {
-        seriaA: {
-          7: {
-            teams: ["Ювентус", "Рома"],
-            result: "2-1",
-            minutesOnField: [8, 1],
-            tackles: [undefined, 1],
-          },
-          24: {
-            teams: ["Ювентус", "Лацио"],
-            result: "2-2",
-            minutesOnField: [90, 2],
-            fullMatch: [true, 1],
-            tackles: [undefined, 1],
-          },
-          26: {
-            teams: ["Ювентус", "Комо"],
-            result: "0-2",
-            minutesOnField: [16, 1],
-          },
-        },
-      },
-    },
-    jPedro: {
-      firstName: "Жоао",
-      lastName: "Педро",
-      team: "Челси",
-      price: {
-        pl: 8,
-      },
-      stats: {
-        pl: {
-          25: {
-            teams: ["Вулверхэмптон", "Челси"],
-            result: "1-3",
-            minutesOnField: [75, 2],
-            earnedPenalty: [2, 6],
-          },
-          26: {
-            teams: ["Челси", "Лидс"],
-            result: "2-2",
-            minutesOnField: [90, 2],
-            fullMatch: [true, 1],
-            goals: [1, 4],
-            earnedPenalty: [1, 3],
-          },
-          27: {
-            teams: ["Челси", "Бернли"],
-            result: "1-1",
-            minutesOnField: [80, 2],
-            goals: [1, 4],
-          },
-        },
-      },
-    },
     davis: {
       firstName: "Кинан",
       lastName: "Дэвис",
@@ -5858,6 +5862,23 @@ export const players = {
         },
       },
     },
+    guirassy: {
+      firstName: "Серу",
+      lastName: "Гирасси",
+      team: "Боруссия Дортмунд",
+      price: {
+        ucl: 8.5,
+      },
+      stats: {
+        ucl: {
+          10: {
+            teams: ["Аталанта", "Боруссия Дортмунд"],
+            result: "4-1",
+            minutesOnField: [90, 2],
+          },
+        },
+      },
+    },
     haaland: {
       firstName: "Эрлинг",
       lastName: "Холанд",
@@ -6016,6 +6037,68 @@ export const players = {
             fullMatch: [true, 1],
             goals: [1, 4],
             captain: true,
+          },
+        },
+      },
+    },
+    jDavid: {
+      firstName: "Джонатан",
+      lastName: "Дэвид",
+      team: "Ювентус",
+      price: {
+        seriaA: 9,
+      },
+      stats: {
+        seriaA: {
+          7: {
+            teams: ["Ювентус", "Рома"],
+            result: "2-1",
+            minutesOnField: [8, 1],
+            tackles: [undefined, 1],
+          },
+          24: {
+            teams: ["Ювентус", "Лацио"],
+            result: "2-2",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            tackles: [undefined, 1],
+          },
+          26: {
+            teams: ["Ювентус", "Комо"],
+            result: "0-2",
+            minutesOnField: [16, 1],
+          },
+        },
+      },
+    },
+    jPedro: {
+      firstName: "Жоао",
+      lastName: "Педро",
+      team: "Челси",
+      price: {
+        pl: 8,
+      },
+      stats: {
+        pl: {
+          25: {
+            teams: ["Вулверхэмптон", "Челси"],
+            result: "1-3",
+            minutesOnField: [75, 2],
+            earnedPenalty: [2, 6],
+          },
+          26: {
+            teams: ["Челси", "Лидс"],
+            result: "2-2",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            goals: [1, 4],
+            earnedPenalty: [1, 3],
+          },
+          27: {
+            teams: ["Челси", "Бернли"],
+            result: "1-1",
+            minutesOnField: [80, 2],
+            goals: [1, 4],
           },
         },
       },
@@ -6496,6 +6579,12 @@ export const players = {
             result: "3-1",
             minutesOnField: [29, 1],
             tackles: [1, 0],
+          },
+          10: {
+            teams: ["Интер", "Буде-Глимт"],
+            result: "1-2",
+            minutesOnField: [90, 2],
+            tackles: [3, 1],
           },
         },
         seriaA: {
