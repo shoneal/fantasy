@@ -16,7 +16,7 @@ export const leagues = {
     background: "linear-gradient(90deg,#37003c,#953bff)",
     button: "#37003c",
     players: {
-      Камиль: 1219,
+      Камиль: 1285,
     },
   },
   laLiga: {
@@ -24,7 +24,7 @@ export const leagues = {
     background: "#ff4b44",
     button: "#ff4b44",
     players: {
-      Камиль: 974,
+      Камиль: 1048,
     },
   },
   seriaA: {
@@ -33,7 +33,7 @@ export const leagues = {
       "url(https://shoneal.github.io/fantasy/images/other/seriA_cover.webp) no-repeat center center / cover",
     button: "#2047e3",
     players: {
-      Камиль: 1215,
+      Камиль: 1258,
     },
   },
 }; // Данные лиг
