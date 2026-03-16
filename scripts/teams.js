@@ -82,4 +82,5 @@ export const teams = {
   Эспаньол: "Espanyol",
   Ювентус: "Juventus",
   Юнион: "Union",
+  "-": "-",
 }; // Логотипы команд

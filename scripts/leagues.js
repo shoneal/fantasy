@@ -4,11 +4,11 @@ export const leagues = {
     background: "linear-gradient(93.5deg,#0232ff 0.59%,#010056 94.82%)",
     button: "#040a63",
     players: {
-      Камиль: 775,
-      Хидир: 690,
-      Эрик: 594,
-      Карузо: 756,
-      Аскольд: 476,
+      Камиль: 836,
+      Хидир: 773,
+      Эрик: 647,
+      Карузо: 796,
+      Аскольд: 527,
     },
   },
   pl: {
@@ -16,7 +16,7 @@ export const leagues = {
     background: "linear-gradient(90deg,#37003c,#953bff)",
     button: "#37003c",
     players: {
-      Камиль: 1285,
+      Камиль: 1408,
     },
   },
   laLiga: {
@@ -24,7 +24,7 @@ export const leagues = {
     background: "#ff4b44",
     button: "#ff4b44",
     players: {
-      Камиль: 1048,
+      Камиль: 1113,
     },
   },
   seriaA: {
@@ -33,7 +33,7 @@ export const leagues = {
       "url(https://shoneal.github.io/fantasy/images/other/seriA_cover.webp) no-repeat center center / cover",
     button: "#2047e3",
     players: {
-      Камиль: 1258,
+      Камиль: 1296,
     },
   },
 }; // Данные лиг
