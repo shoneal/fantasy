@@ -169,11 +169,17 @@ export const players = {
       stats: {
         laLiga: {
           19: {
-            teams: ["Вильярреал", "Алавес"],
+            teams: ["Вильярреал", "Депортиво Алавес"],
             result: "3-1",
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             saves: [4, 1],
+          },
+          28: {
+            teams: ["Депортиво Алавес", "Вильярреал"],
+            result: "1-1",
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
           },
         },
       },
@@ -328,6 +334,13 @@ export const players = {
             cleanSheet: [true, 4],
             saves: [2, 0],
           },
+          29: {
+            teams: ["Лацио", "Милан"],
+            result: "1-0",
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+            saves: [2, 0],
+          },
         },
       },
     },
@@ -380,14 +393,14 @@ export const players = {
       },
       stats: {
         ucl: {
-          9: {
+          "1/16(1)": {
             teams: ["Брюгге", "Атлетико"],
             result: "3-3",
             minutesOnField: [90, 2],
             saves: [6, 2],
             missedGoals: [3, -1],
           },
-          10: {
+          "1/16(2)": {
             teams: ["Атлетико", "Брюгге"],
             result: "4-1",
             minutesOnField: [90, 2],
@@ -581,11 +594,18 @@ export const players = {
             cleanSheet: [true, 4],
             saves: [7, 2],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Байер", "Арсенал"],
             result: "1-1",
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
+            saves: [2, 0],
+          },
+          "1/8(2)": {
+            teams: ["Арсенал", "Байер"],
+            result: "2-0",
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
             saves: [2, 0],
           },
         },
@@ -851,6 +871,13 @@ export const players = {
             missedGoals: [1, 0],
             tackles: [undefined, 1],
           },
+          29: {
+            teams: ["Интер", "Аталанта"],
+            result: "1-1",
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -1062,6 +1089,13 @@ export const players = {
             missedGoals: [1, 0],
             tackles: [undefined, 1],
           },
+          29: {
+            teams: ["Интер", "Аталанта"],
+            result: "1-1",
+            minutesOnField: [65, 2],
+            cleanSheet: [true, 4],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -1250,6 +1284,12 @@ export const players = {
             yellowCard: [1, -1],
             tackles: [undefined, 1],
           },
+          29: {
+            teams: ["Комо", "Рома"],
+            result: "2-1",
+            minutesOnField: [64, 2],
+            redCard: [1, -3],
+          },
         },
       },
     },
@@ -1263,12 +1303,20 @@ export const players = {
       },
       stats: {
         ucl: {
-          11: {
+          "1/8(1)": {
             teams: ["Байер", "Арсенал"],
             result: "1-1",
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             tackles: [10, 3],
+          },
+          "1/8(2)": {
+            teams: ["Арсенал", "Байер"],
+            result: "2-0",
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            tackles: [6, 2],
+            captain: true,
           },
         },
         pl: {
@@ -1554,7 +1602,7 @@ export const players = {
       },
       stats: {
         ucl: {
-          9: {
+          "1/16(1)": {
             teams: ["Монако", "ПСЖ"],
             result: "2-3",
             minutesOnField: [90, 2],
@@ -1562,7 +1610,7 @@ export const players = {
             missedGoals: [2, -1],
             tackles: [2, 0],
           },
-          10: {
+          "1/16(2)": {
             teams: ["ПСЖ", "Монако"],
             result: "2-2",
             minutesOnField: [90, 2],
@@ -1689,6 +1737,13 @@ export const players = {
             missedGoals: [1, 0],
             yellowCard: [1, -1],
             concedingPenalty: [1, -2],
+          },
+          28: {
+            teams: ["Реал Мадрид", "Эльче"],
+            result: "4-1",
+            minutesOnField: [90, 2],
+            goals: [1, 6],
+            missedGoals: [1, 0],
           },
         },
       },
@@ -2152,6 +2207,12 @@ export const players = {
             yellowCard: [1, -1],
             tackles: [undefined, 1],
           },
+          28: {
+            teams: ["Бетис", "Сельта"],
+            result: "1-1",
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+          },
         },
       },
     },
@@ -2239,7 +2300,7 @@ export const players = {
             missedGoals: [1, 0],
             tackles: [8, 2],
           },
-          10: {
+          "1/16(2)": {
             teams: ["ПСЖ", "Монако"],
             result: "2-2",
             minutesOnField: [80, 2],
@@ -2305,14 +2366,14 @@ export const players = {
             missedGoals: [1, 0],
             tackles: [9, 3],
           },
-          9: {
+          "1/16(1)": {
             teams: ["Монако", "ПСЖ"],
             result: "2-3",
             minutesOnField: [90, 2],
             missedGoals: [2, -1],
             tackles: [6, 2],
           },
-          10: {
+          "1/16(2)": {
             teams: ["ПСЖ", "Монако"],
             result: "2-2",
             minutesOnField: [90, 2],
@@ -2390,6 +2451,13 @@ export const players = {
             missedGoals: [1, 0],
             tackles: [undefined, 3],
           },
+          28: {
+            teams: ["Реал Мадрид", "Эльче"],
+            result: "4-1",
+            minutesOnField: [61, 2],
+            goals: [1, 6],
+            cleanSheet: [true, 4],
+          },
         },
       },
     },
@@ -2398,9 +2466,19 @@ export const players = {
       lastName: "Салиба",
       team: "Арсенал",
       price: {
+        ucl: 5.9,
         pl: 6,
       },
       stats: {
+        ucl: {
+          "1/8(2)": {
+            teams: ["Арсенал", "Байер"],
+            result: "2-0",
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            tackles: [9, 3],
+          },
+        },
         pl: {
           7: {
             teams: ["Арсенал", "Вест Хэм"],
@@ -2622,6 +2700,13 @@ export const players = {
             tackles: [undefined, 1],
             assits: [1, 3],
           },
+          29: {
+            teams: ["Наполи", "Лечче"],
+            result: "2-1",
+            minutesOnField: [72, 2],
+            missedGoals: [1, 0],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -2701,7 +2786,7 @@ export const players = {
             assists: [1, 3],
             missedGoals: [1, 0],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Байер", "Арсенал"],
             result: "1-1",
             minutesOnField: [90, 2],
@@ -2866,7 +2951,7 @@ export const players = {
             yellowCard: [1, -1],
             tackles: [3, 1],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Аталанта", "Бавария"],
             result: "1-6",
             minutesOnField: [90, 2],
@@ -2887,13 +2972,20 @@ export const players = {
       },
       stats: {
         ucl: {
-          11: {
+          "1/8(1)": {
             teams: ["Галатасарай", "Ливерпуль"],
             result: "1-0",
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             yellowCard: [1, -1],
             tackles: [7, 2],
+          },
+          "1/8(2)": {
+            teams: ["Ливерпуль", "Галатасарай"],
+            result: "4-0",
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            tackles: [9, 3],
           },
         },
         pl: {
@@ -3513,6 +3605,14 @@ export const players = {
             minutesOnField: [64, 2],
             tackles: [undefined, 2],
           },
+          28: {
+            teams: ["Реал Мадрид", "Эльче"],
+            result: "4-1",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            yellowCard: [1, -1],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -3560,6 +3660,13 @@ export const players = {
             result: "2-1",
             minutesOnField: [45, 1],
             yellowCard: [1, -1],
+            tackles: [undefined, 1],
+          },
+          29: {
+            teams: ["Комо", "Рома"],
+            result: "2-1",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
             tackles: [undefined, 1],
           },
         },
@@ -3793,11 +3900,19 @@ export const players = {
             result: "3-0",
             minutesOnField: [62, 2],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Ньюкасл", "Барселона"],
             result: "1-1",
             minutesOnField: [88, 2],
             tackles: [4, 1],
+          },
+          "1/8(2)": {
+            teams: ["Барселона", "Ньюкасл"],
+            result: "7-2",
+            minutesOnField: [66, 2],
+            assists: [1, 3],
+            goals: [1, 5],
+            tackles: [2, 0],
           },
         },
       },
@@ -3924,13 +4039,13 @@ export const players = {
       },
       stats: {
         ucl: {
-          9: {
+          "1/16(1)": {
             teams: ["Брюгге", "Атлетико"],
             result: "3-3",
             minutesOnField: [90, 2],
             tackles: [7, 2],
           },
-          10: {
+          "1/16(2)": {
             teams: ["Атлетико", "Брюгге"],
             result: "4-1",
             minutesOnField: [83, 2],
@@ -4004,6 +4119,11 @@ export const players = {
             teams: ["Атлетико", "Реал Сосьедад"],
             result: "3-2",
             minutesOnField: [53, 1],
+          },
+          28: {
+            teams: ["Атлетико", "Хетафе"],
+            result: "1-0",
+            minutesOnField: [24, 1],
           },
         },
       },
@@ -4130,6 +4250,31 @@ export const players = {
             minutesOnField: [80, 2],
             tackles: [undefined, 1],
           },
+          28: {
+            teams: ["Жирона", "Атлетик Бильбао"],
+            result: "3-0",
+            minutesOnField: [79, 2],
+          },
+        },
+      },
+    },
+    karl: {
+      firstName: "Леннарт",
+      lastName: "Карл",
+      team: "Бавария",
+      price: {
+        ucl: 5.1,
+      },
+      stats: {
+        ucl: {
+          "1/8(2)": {
+            teams: ["Бавария", "Аталанта"],
+            result: "4-1",
+            minutesOnField: [90, 2],
+            assists: [1, 3],
+            goals: [1, 5],
+            tackles: [3, 1],
+          },
         },
       },
     },
@@ -4149,13 +4294,13 @@ export const players = {
             minutesOnField: [90, 2],
             tackles: [7, 2],
           },
-          9: {
+          "1/16(1)": {
             teams: ["Галатасарай", "Ювентус"],
             result: "5-2",
             minutesOnField: [80, 2],
             tackles: [2, 0],
           },
-          10: {
+          "1/16(2)": {
             teams: ["Ювентус", "Галатасарай"],
             result: "3-2",
             minutesOnField: [77, 2],
@@ -4267,6 +4412,11 @@ export const players = {
             cleanSheet: [true, 1],
             tackles: [undefined, 1],
           },
+          29: {
+            teams: ["Удинезе", "Ювентус"],
+            result: "0-1",
+            minutesOnField: [49, 1],
+          },
         },
       },
     },
@@ -4304,14 +4454,14 @@ export const players = {
       },
       stats: {
         ucl: {
-          9: {
+          "1/16(1)": {
             teams: ["Монако", "ПСЖ"],
             result: "2-3",
             minutesOnField: [69, 2],
             earnedPenalty: [1, 2],
             tackles: [1, 0],
           },
-          10: {
+          "1/16(2)": {
             teams: ["ПСЖ", "Монако"],
             result: "2-2",
             minutesOnField: [90, 2],
@@ -4357,6 +4507,11 @@ export const players = {
             result: "1-0",
             minutesOnField: [73, 2],
             cleanSheet: [true, 1],
+          },
+          29: {
+            teams: ["Лацио", "Милан"],
+            result: "1-0",
+            minutesOnField: [67, 2],
           },
         },
       },
@@ -4656,6 +4811,13 @@ export const players = {
             fullMatch: [true, 1],
             tackles: [undefined, 1],
           },
+          29: {
+            teams: ["Комо", "Рома"],
+            result: "2-1",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -4831,6 +4993,14 @@ export const players = {
             tackles: [undefined, 2],
             captain: true,
           },
+          29: {
+            teams: ["Лацио", "Милан"],
+            result: "1-0",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            tackles: [undefined, 2],
+            captain: true,
+          },
         },
       },
     },
@@ -4956,7 +5126,7 @@ export const players = {
             yellowCard: [1, -1],
             tackles: [2, 0],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Аталанта", "Бавария"],
             result: "1-6",
             minutesOnField: [90, 2],
@@ -5175,6 +5345,11 @@ export const players = {
             minutesOnField: [45, 1],
             assists: [1, 3],
           },
+          28: {
+            teams: ["Барселона", "Севилья"],
+            result: "5-2",
+            minutesOnField: [45, 1],
+          },
         },
       },
     },
@@ -5196,11 +5371,21 @@ export const players = {
             tackles: [3, 1],
             captain: true,
           },
-          11: {
+          "1/8(1)": {
             teams: ["Ньюкасл", "Барселона"],
             result: "1-1",
             minutesOnField: [88, 2],
             tackles: [2, 0],
+          },
+          "1/8(2)": {
+            teams: ["Барселона", "Ньюкасл"],
+            result: "7-2",
+            minutesOnField: [90, 2],
+            assists: [2, 6],
+            goals: [2, 10],
+            concedingPenalty: [1, 2],
+            tackles: [1, 0],
+            playerOfTheMatch: [true, 3],
           },
         },
         laLiga: {
@@ -5527,9 +5712,22 @@ export const players = {
       lastName: "Собослаи",
       team: "Ливерпуль",
       price: {
+        ucl: 6.9,
         pl: 7,
       },
       stats: {
+        ucl: {
+          "1/8(2)": {
+            teams: ["Ливерпуль", "Галатасарай"],
+            result: "4-0",
+            minutesOnField: [90, 2],
+            goals: [1, 5],
+            cleanSheet: [true, 1],
+            concedingPenalty: [1, 2],
+            tackles: [7, 2],
+            playerOfTheMatch: [true, 3],
+          },
+        },
         pl: {
           16: {
             teams: ["Ливерпуль", "Брайтон"],
@@ -5715,12 +5913,19 @@ export const players = {
             minutesOnField: [80, 2],
             tackles: [4, 1],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Ньюкасл", "Барселона"],
             result: "1-1",
             minutesOnField: [90, 2],
             goals: [1, 5],
             captain: true,
+          },
+          "1/8(2)": {
+            teams: ["Барселона", "Ньюкасл"],
+            result: "7-2",
+            minutesOnField: [90, 2],
+            assists: [1, 3],
+            goals: [1, 5],
           },
         },
         laLiga: {
@@ -5751,6 +5956,12 @@ export const players = {
             tackles: [undefined, 1],
             captain: true,
           },
+          28: {
+            teams: ["Барселона", "Севилья"],
+            result: "5-2",
+            minutesOnField: [23, 1],
+            captain: true,
+          },
         },
       },
     },
@@ -5770,7 +5981,7 @@ export const players = {
             minutesOnField: [82, 2],
             cleanSheet: [true, 1],
           },
-          10: {
+          "1/16(2)": {
             teams: ["Ювентус", "Галатасарай"],
             result: "3-2",
             minutesOnField: [103, 2],
@@ -5969,13 +6180,13 @@ export const players = {
       },
       stats: {
         ucl: {
-          9: {
+          "1/16(1)": {
             teams: ["Буде-Глимт", "Интер"],
             result: "3-1",
             minutesOnField: [14, 1],
             tackles: [3, 1],
           },
-          10: {
+          "1/16(2)": {
             teams: ["Интер", "Буде-Глимт"],
             result: "1-2",
             minutesOnField: [62, 2],
@@ -6076,6 +6287,12 @@ export const players = {
             result: "1-1",
             minutesOnField: [67, 2],
             goals: [1, 4],
+            tackles: [undefined, 1],
+          },
+          28: {
+            teams: ["Барселона", "Севилья"],
+            result: "5-2",
+            minutesOnField: [45, 1],
             tackles: [undefined, 1],
           },
         },
@@ -6236,6 +6453,12 @@ export const players = {
             fullMatch: [true, 1],
             goals: [1, 4],
           },
+          28: {
+            teams: ["Реал Сосьедад", "Осасуна"],
+            result: "3-1",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+          },
         },
       },
     },
@@ -6300,6 +6523,13 @@ export const players = {
             goals: [1, 4],
             tackles: [undefined, 1],
           },
+          29: {
+            teams: ["Удинезе", "Ювентус"],
+            result: "0-1",
+            minutesOnField: [90, 2],
+            fullMatch: [true, 1],
+            tackles: [undefined, 1],
+          },
         },
       },
     },
@@ -6350,11 +6580,18 @@ export const players = {
             goals: [1, 4],
             outsideTheBox: [1, 1],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Галатасарай", "Ливерпуль"],
             result: "1-0",
             minutesOnField: [90, 2],
             tackles: [4, 1],
+          },
+          "1/8(2)": {
+            teams: ["Ливерпуль", "Галатасарай"],
+            result: "4-0",
+            minutesOnField: [89, 2],
+            goals: [1, 4],
+            tackles: [2, 0],
           },
         },
         pl: {
@@ -6532,7 +6769,7 @@ export const players = {
       },
       stats: {
         ucl: {
-          10: {
+          "1/16(2)": {
             teams: ["Аталанта", "Боруссия Дортмунд"],
             result: "4-1",
             minutesOnField: [90, 2],
@@ -6584,10 +6821,17 @@ export const players = {
             goals: [1, 4],
             tackles: [1, 0],
           },
-          11: {
+          "1/8(1)": {
             teams: ["Реал Мадрид", "Манчестер Сити"],
             result: "3-0",
             minutesOnField: [82, 2],
+            tackles: [1, 0],
+          },
+          "1/8(2)": {
+            teams: ["Манчестер Сити", "Реал Мадрид"],
+            result: "1-2",
+            minutesOnField: [57, 1],
+            goals: [1, 4],
             tackles: [1, 0],
           },
         },
@@ -6888,7 +7132,7 @@ export const players = {
       },
       stats: {
         ucl: {
-          9: {
+          "1/16(1)": {
             teams: ["Буде-Глимт", "Интер"],
             result: "3-1",
             minutesOnField: [61, 2],
@@ -7123,7 +7367,7 @@ export const players = {
             minutesOnField: [90, 2],
             goals: [2, 8],
           },
-          9: {
+          "1/16(1)": {
             teams: ["Бенфика", "Реал Мадрид"],
             result: "0-1",
             minutesOnField: [90, 2],
@@ -7262,13 +7506,13 @@ export const players = {
             tackles: [1, 0],
             playerOfTheMatch: [true, 3],
           },
-          9: {
+          "1/16(1)": {
             teams: ["Буде-Глимт", "Интер"],
             result: "3-1",
             minutesOnField: [29, 1],
             tackles: [1, 0],
           },
-          10: {
+          "1/16(2)": {
             teams: ["Интер", "Буде-Глимт"],
             result: "1-2",
             minutesOnField: [90, 2],

@@ -1,8 +1,8 @@
-import { players } from './players.js';
-import { activeTeams } from './active-teams.js';
-import { teams } from './teams.js';
-import { leagues } from './leagues.js';
-import { terms } from './terms.js';
+import { players } from "./players.js";
+import { activeTeams } from "./active-teams.js";
+import { teams } from "./teams.js";
+import { leagues } from "./leagues.js";
+import { terms } from "./terms.js";
 
 for (const key in terms) {
   if (terms[key].length >= 4) {
@@ -368,36 +368,65 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
 
     // Создание кнопок туров
     const opponents = teamInfo[`opponents_${leagueKey}`];
-    const startIndex =
-      leagueKey === "pl"
-        ? 7
-        : leagueKey === "laLiga"
-          ? 8
-          : leagueKey === "seriaA"
-            ? 6
-            : 1;
+
+    const tourNumbers =
+      leagueKey === "ucl"
+        ? [
+            ...Array.from({ length: 8 }, (_, i) => i + 1),
+            "1/16(1)",
+            "1/16(2)",
+            "1/8(1)",
+            "1/8(2)",
+            "1/4(1)",
+            "1/4(2)",
+            "1/2(1)",
+            "1/2(2)",
+            "Final",
+          ]
+        : Array.from(
+            { length: opponents.length },
+            (_, i) =>
+              (leagueKey === "pl"
+                ? 7
+                : leagueKey === "laLiga"
+                  ? 8
+                  : leagueKey === "seriaA"
+                    ? 6
+                    : 1) + i,
+          );
 
     popupElements.buttons.innerHTML = "";
+
     opponents.forEach((teamName, index) => {
-      const tourNumber = startIndex + index;
+      const tourNumber = tourNumbers[index];
+      const isNumber = typeof tourNumber === "number";
+      const displayText = isNumber
+        ? `GW.${tourNumber}`
+        : tourNumber === "Final"
+          ? "Final"
+          : tourNumber.replace(/\s*\(\d\)$/, "");
+
       const button = document.createElement("button");
       const p = document.createElement("p");
       const buttonWrapper = document.createElement("div");
       const imgWrapper = document.createElement("div");
       const img = document.createElement("img");
 
-      p.textContent = `GW.${tourNumber}`;
+      p.textContent = displayText;
       img.src = `${locationOfTheImages}logos/teams/${teams[teamName]}.png`;
       img.alt = `Логотип ${teamName}`;
-      imgWrapper.appendChild(img);
+
       imgWrapper.classList.add("popup_button_img_wrapper");
-      buttonWrapper.appendChild(imgWrapper);
       buttonWrapper.classList.add("popup_button_wrapper");
+
+      imgWrapper.appendChild(img);
+      buttonWrapper.appendChild(imgWrapper);
       button.appendChild(p);
       button.appendChild(buttonWrapper);
-      button.dataset.tour = tourNumber;
 
+      button.dataset.tour = tourNumber;
       if (!stats[tourNumber]) button.classList.add("disabled");
+
       popupElements.buttons.appendChild(button);
     });
 
