@@ -28,10 +28,10 @@ function translate(term, value) {
   return num >= 11 && num <= 14
     ? data[2]
     : lastDigit === 1
-      ? data[0]
-      : lastDigit >= 2 && lastDigit <= 4
-        ? data[1]
-        : data[2];
+    ? data[0]
+    : lastDigit >= 2 && lastDigit <= 4
+    ? data[1]
+    : data[2];
 }
 const locationOfTheImages = "https://shoneal.github.io/fantasy/images/";
 
@@ -133,7 +133,7 @@ const headerElements = {
   title: document.querySelector(".header_title"),
   points: document.querySelector(".header_points"),
   runningLine: document.querySelector(".header_running_line"),
-  standings: document.querySelector(".main_standings"),
+  standings: document.querySelector(".main_standings")
 };
 const playersList = document.querySelector(".players_list");
 const playerTemplate = document.querySelector("#player-template").content;
@@ -146,11 +146,11 @@ function createElements(container, { count = 0 } = {}) {
 }
 createElements(headerElements.runningLine, { count: 30 });
 createElements(playerTemplate.querySelector(".player_running_line"), {
-  count: 4,
+  count: 4
 });
 createElements(document.querySelector(".popup_running_line"), { count: 20 });
 let appState = {
-  currentLeagueKey: null,
+  currentLeagueKey: null
 };
 const BREAKPOINT = 1280;
 const logoLink = `${locationOfTheImages}logos/leagues/big/`;
@@ -160,8 +160,8 @@ function updateLogo() {
     appState.currentLeagueKey === "seriaA"
       ? `${logoLink}${appState.currentLeagueKey}.png`
       : window.innerWidth < BREAKPOINT
-        ? `${logoWhiteLink}${appState.currentLeagueKey}.png`
-        : `${logoLink}${appState.currentLeagueKey}.png`;
+      ? `${logoWhiteLink}${appState.currentLeagueKey}.png`
+      : `${logoLink}${appState.currentLeagueKey}.png`;
 }
 function updateHeaderAndCSS(leagueKey) {
   appState.currentLeagueKey = leagueKey;
@@ -173,13 +173,12 @@ function updateHeaderAndCSS(leagueKey) {
 
   document.documentElement.style.setProperty(
     "--background-header-from-js",
-    league.background,
+    league.background
   );
   headerElements.title.textContent = league.name;
   headerElements.points.textContent = calculateScore(leagueKey);
   headerElements.logoBig.src = `${logoWhiteLink}${leagueKey}.png`;
-  headerElements.logo.alt =
-    headerElements.logoBig.alt = `Логотип ${league.name}`;
+  headerElements.logo.alt = headerElements.logoBig.alt = `Логотип ${league.name}`;
 
   let loaded = 0;
   const onLoad = () => {
@@ -221,7 +220,7 @@ function updateHeaderAndCSS(leagueKey) {
     return row;
   });
   const myIndex = rows.findIndex((r) =>
-    r.classList.contains("standings_team_is-active"),
+    r.classList.contains("standings_team_is-active")
   );
   if (myIndex !== -1) {
     rows.forEach((row, idx) => {
@@ -238,7 +237,7 @@ function renderPlayersList() {
   playersList.innerHTML = Object.keys(players)
     .map((position) => {
       const count = Object.values(players[position]).filter(
-        (player) => player.stats?.[activeLeague],
+        (player) => player.stats?.[activeLeague]
       ).length;
 
       return count
@@ -260,7 +259,7 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
     firstName: playerClone.querySelector(".player_firstName"),
     lastName: playerClone.querySelector(".player_lastName"),
     pointsWrapper: playerClone.querySelector(".player_totalPoints_wrapper"),
-    runningLinePs: playerClone.querySelectorAll(".player_running_line p"),
+    runningLinePs: playerClone.querySelectorAll(".player_running_line p")
   };
   const popup = document.querySelector(".popup");
   const linkToThePhoto = `${locationOfTheImages}players/${leagueKey}/${playerKey}.${
@@ -296,7 +295,7 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
   }
 
   templateElements.runningLinePs.forEach(
-    (p) => (p.textContent = parentKey.slice(0, -1)),
+    (p) => (p.textContent = parentKey.slice(0, -1))
   );
 
   templateElements.player.addEventListener("click", () => {
@@ -312,7 +311,7 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
       buttons: popup.querySelector(".popup_buttons"),
       tourResult: popup.querySelector(".tour_result"),
       tourStats: popup.querySelector(".tour_statistics"),
-      genStats: popup.querySelector(".general_statistics"),
+      genStats: popup.querySelector(".general_statistics")
     };
 
     // Инициализация popup
@@ -328,13 +327,13 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
     const elementsToLoad = [
       popupElements.photo,
       popupElements.team,
-      popupElements.teamBig,
+      popupElements.teamBig
     ];
     elementsToLoad.forEach((el) => (el.style.opacity = 0));
     popupElements.header.classList.remove(
       ...Array.from(popupElements.header.classList).filter((cls) =>
-        cls.startsWith("popup_header_"),
-      ),
+        cls.startsWith("popup_header_")
+      )
     );
     popupElements.header.classList.add(`popup_header_${leagueKey}`);
     popupElements.firstName.textContent = playerData.firstName;
@@ -348,10 +347,9 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
     popupElements.teamBig.src = `${locationOfTheImages}logos/teams/white/${
       teams[playerData.team]
     }.png`;
-    popupElements.team.alt =
-      popupElements.teamBig.alt = `Логотип футбольного клуба ${playerData.team}`;
+    popupElements.team.alt = popupElements.teamBig.alt = `Логотип футбольного клуба ${playerData.team}`;
     popupElements.runningLinePs.forEach(
-      (p) => (p.textContent = parentKey.slice(0, -1)),
+      (p) => (p.textContent = parentKey.slice(0, -1))
     );
     let loaded = 0;
     const onLoad = () => {
@@ -381,7 +379,7 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
             "1/4(2)",
             "1/2(1)",
             "1/2(2)",
-            "Final",
+            "Final"
           ]
         : Array.from(
             { length: opponents.length },
@@ -389,10 +387,10 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
               (leagueKey === "pl"
                 ? 7
                 : leagueKey === "laLiga"
-                  ? 8
-                  : leagueKey === "seriaA"
-                    ? 6
-                    : 1) + i,
+                ? 8
+                : leagueKey === "seriaA"
+                ? 6
+                : 1) + i
           );
 
     popupElements.buttons.innerHTML = "";
@@ -403,8 +401,8 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
       const displayText = isNumber
         ? `GW.${tourNumber}`
         : tourNumber === "Final"
-          ? "Final"
-          : tourNumber.replace(/\s*\(\d\)$/, "");
+        ? "Final"
+        : tourNumber.replace(/\s*\(\d\)$/, "");
 
       const button = document.createElement("button");
       const p = document.createElement("p");
@@ -435,11 +433,11 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
     const rightColor = `#${teamInfo.color[1]}`;
     document.documentElement.style.setProperty(
       "--background-team-left",
-      leftColor,
+      leftColor
     );
     document.documentElement.style.setProperty(
       "--background-team-right",
-      rightColor,
+      rightColor
     );
 
     // Находим активную кнопку
@@ -450,67 +448,8 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
     if (activeButton) activeButton.classList.add("active");
 
     // Очистка контейнеров
-    popupElements.tourResult.innerHTML =
-      popupElements.tourStats.innerHTML =
-      popupElements.genStats.innerHTML =
-        "";
-
-    const matchesPlayed = popup.querySelector(".main_stats_matches-played");
-    const priceStats = popup.querySelector(".main_stats_price");
-    const diff1 = popup.querySelector(".main_stats_different-1");
-    const diff2 = popup.querySelector(".main_stats_different-2");
-    const setStat = (container, value, term, icon) => {
-      container.querySelector(".main_stats_value").textContent = value;
-      container.querySelector(".main_stats_description").textContent =
-        translate(term, value);
-      const img = container.querySelector(".main_stats_img");
-      img.style.opacity = "0";
-      img.src = `${locationOfTheImages}icons/${icon}.png`;
-      setupImageWithContainer(img);
-    };
-    const matchesCount = Object.keys(stats).filter(
-      (k) => !["teams", "result"].includes(k),
-    ).length;
-    setStat(matchesPlayed, matchesCount, "games", "field");
-    setStat(priceStats, playerData.price[leagueKey], "price", "price-tag");
-    if (parentKey === "goalkeepers") {
-      const saves = Object.values(stats).reduce(
-        (s, t) => s + (t.saves?.[0] || 0),
-        0,
-      );
-      setStat(diff1, saves, "saves", "glove");
-    } else if (parentKey === "defenders") {
-      const goals = Object.values(stats).reduce(
-        (s, t) => s + (t.goals?.[0] || 0),
-        0,
-      );
-      const assists = Object.values(stats).reduce(
-        (s, t) => s + (t.assists?.[0] || 0),
-        0,
-      );
-      diff1.querySelector(".main_stats_value").textContent = goals + assists;
-      diff1.querySelector(".main_stats_description").textContent = "гол+пас";
-      diff1.querySelector(".main_stats_img").src =
-        `${locationOfTheImages}icons/shoes.png`;
-    } else if (["midfielders", "forwards"].includes(parentKey)) {
-      const goals = Object.values(stats).reduce(
-        (s, t) => s + (t.goals?.[0] || 0),
-        0,
-      );
-      setStat(diff1, goals, "goals", "ball");
-    }
-    if (["goalkeepers", "defenders"].includes(parentKey)) {
-      const cleanSheets = Object.values(stats).filter(
-        (t) => t.cleanSheet,
-      ).length;
-      setStat(diff2, cleanSheets, "cleanSheet", "lock");
-    } else if (["midfielders", "forwards"].includes(parentKey)) {
-      const assists = Object.values(stats).reduce(
-        (s, t) => s + (t.assists?.[0] || 0),
-        0,
-      );
-      setStat(diff2, assists, "assists", "shoes");
-    }
+    popupElements.tourResult.innerHTML = popupElements.tourStats.innerHTML = popupElements.genStats.innerHTML =
+      "";
 
     // Собираем общую статистику
     const generalStats = {};
@@ -547,6 +486,15 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
         }
       }
     }
+
+    // Создаём и добавляем элемент с общим количеством матчей
+    const matchesCount = Object.keys(stats).filter(
+      (k) => !["teams", "result"].includes(k)
+    ).length;
+    const matchesP = document.createElement("p");
+    const matchesBaseText = translate("games", matchesCount);
+    matchesP.textContent = `${matchesCount} ${matchesBaseText}`;
+    popupElements.genStats.appendChild(matchesP);
 
     // Отображаем общую статистику
     const keys = Object.keys(generalStats);
@@ -620,7 +568,7 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
       scoreElement.textContent = score;
 
       [homeTeamElement, awayTeamElement].forEach((el) =>
-        el.classList.remove("loser"),
+        el.classList.remove("loser")
       );
       if (homeScore < awayScore) {
         homeTeamElement.classList.add("loser");
@@ -633,7 +581,7 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
         homeLogo,
         scoreElement,
         awayLogo,
-        awayTeamElement,
+        awayTeamElement
       ].forEach((element) => popupElements.tourResult.appendChild(element));
 
       let totalPoints = 0;
@@ -719,8 +667,8 @@ function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
 function addPlayers(position, leagueKey) {
   playersList.classList.remove(
     ...Array.from(playersList.classList).filter((cls) =>
-      cls.startsWith("players_list_"),
-    ),
+      cls.startsWith("players_list_")
+    )
   );
   playersList.classList.add(`players_list_${leagueKey}`);
 
@@ -735,7 +683,7 @@ function addPlayers(position, leagueKey) {
       validPlayers.push({
         player,
         playerKey,
-        points: calculatePlayerPoints(player.stats[leagueKey]),
+        points: calculatePlayerPoints(player.stats[leagueKey])
       });
     }
   }
@@ -743,7 +691,7 @@ function addPlayers(position, leagueKey) {
   const fragment = document.createDocumentFragment();
   for (const { player, playerKey } of validPlayers) {
     fragment.appendChild(
-      createPlayerElement(player, leagueKey, position, playerKey),
+      createPlayerElement(player, leagueKey, position, playerKey)
     );
   }
   container.appendChild(fragment);
@@ -755,7 +703,7 @@ function updatePlayers(leagueKey) {
 }
 function handleButtonClick(button) {
   headerElements.buttons.forEach((btn) =>
-    btn.classList.remove("header_button-is_active"),
+    btn.classList.remove("header_button-is_active")
   );
   button.classList.add("header_button-is_active");
 
