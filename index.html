@@ -46,98 +46,89 @@
   </head>
 
   <body>
-    <header class="header">
-      <div class="header_top">
-        <div class="header_top_main">
-          <div class="header_logo_wrapper">
-            <img class="header_logo" src="" alt="" />
-          </div>
-          <div class="header_top_right">
-            <h1 class="header_title"></h1>
-            <h2 class="header_subtitle">
-              <span class="header_points"></span>оч.
-            </h2>
-            <img class="header_logo_transparent" src="" alt="" />
-          </div>
-        </div>
-        <div class="header_running_line"></div>
-      </div>
-      <div class="header_buttons_wrapper">
-        <div class="header_buttons"></div>
-      </div>
-    </header>
-    <main class="main">
-      <div class="players_list"></div>
-      <div class="main_standings">
-        <div class="standings_header">
-          <p>#</p>
-          <p>Игрок</p>
-          <p>Оч.</p>
-        </div>
-      </div>
-    </main>
-    <div class="popup">
-      <div class="popup-content">
-        <div class="close">
-          <svg
-            style="outline-style: none; z-index: 1"
-            tabindex="-1"
-            viewBox="0 0 320 512"
-          >
-            <path
-              d="M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z"
-            />
-          </svg>
-        </div>
-        <div class="popup_header">
-          <div class="popup_header_right">
-            <img class="popup_player_team_big" src="" alt="" />
-            <div class="popup_player_photo_wrapper">
-              <img class="popup_player_photo" src="" alt="" />
-            </div>
-            <h2 class="popup_player_points_title">
-              <span class="popup_player_points"></span> оч.
-            </h2>
-          </div>
-          <div class="popup_running_line"></div>
-          <div class="popup_footer">
-            <div class="popup_player_team_wrapper">
-              <img class="popup_player_team" src="" alt="" />
-            </div>
-            <div class="popup_player_name">
-              <h2 class="popup_player_firstName"></h2>
-              <h1 class="popup_player_lastName"></h1>
-            </div>
-          </div>
-        </div>
-        <h3 class="general_statistics_title">Матчи</h3>
-        <div class="popup_buttons"></div>
-        <div class="tour_result_wrapper">
-          <div class="tour_result">
-            <p class="home_team"></p>
-            <img class="home_team_logo" src="" alt="" />
-            <p class="match_score"></p>
-            <img class="guess_team_logo" src="" alt="" />
-            <p class="guess_team"></p>
-          </div>
-        </div>
-        <div class="tour_statistics"></div>
-        <h3 class="general_statistics_title">Этот сезон</h3>
-        <div class="general_statistics"></div>
+  <header class="header">
+    <div class="navigation-wrapper">
+      <div class="navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 402 178"><path fill="#fff" d="m244.994 62.414-3.138 3.876c-8.985-11.18-24.27-18.866-40.855-18.866s-31.87 7.687-40.855 18.864l-3.138-3.874c9.894-11.825 26.114-19.822 43.993-19.822s34.099 7.997 43.993 19.822m-83.786-20.722c.142-1.535-.28-2.573-1.809-4.446l-8.764-10.783 4.728-3.84 9.546 11.74c2.024 2.495 2.855 5.03 2.544 7.753-.341 3.005-1.795 5.517-4.445 7.681-2.38 1.924-4.835 2.856-7.478 2.833q-.474-.005-.955-.049c-2.729-.25-5.041-1.582-7.071-4.07l-9.549-11.743 4.727-3.842 8.768 10.777c1.522 1.878 2.452 2.505 3.981 2.68 1.208.142 2.575-.324 3.751-1.28 1.181-.96 1.92-2.203 2.026-3.41m31.458-24.862-11.771 2.387.818 4.027 10.772-2.186 1.139 5.61-10.77 2.186.327 1.613c.435 2.14 1.052 2.35 2.959 1.963l9.311-1.888 1.152 5.674-9.571 1.942q-1.318.266-2.482.269c-1.524 0-2.845-.34-3.946-1.02-1.668-1.027-2.764-2.788-3.26-5.233l-3.052-15.033c-.142-.698-.035-1.343.31-1.866.347-.52.899-.871 1.598-1.012l15.316-3.108zm25.571 4.326-.413 1.588 10.624 2.752-1.434 5.531-10.622-2.75-2.482 9.613-3.505-.907c-.687-.178-1.22-.557-1.537-1.095-.315-.538-.389-1.187-.21-1.876l3.853-14.867c1.259-4.853 4.8-6.789 9.972-5.449l9.437 2.444-1.45 5.595-9.177-2.378c-1.88-.486-2.51-.31-3.056 1.799m-85.146 11.779-3.239-4a94 94 0 0 1 5.027-4.675C153.008 8.615 176.492 0 201.001 0c24.51 0 47.993 8.615 66.121 24.26a94 94 0 0 1 5.029 4.675l-3.24 4a89 89 0 0 0-5.133-4.802C246.577 13.29 224.282 5.117 201.001 5.117s-45.576 8.174-62.777 23.016a89 89 0 0 0-5.133 4.802M244.18 52.783l1.051-3.626-4.522-3.376 3.642-2.608 2.108 1.584 2.395-8.073-13.896 8.983-5.697-3.222 21.797-14.101c.84-.544 1.99-1.025 3.444.095l.932.718c1.469 1.13 1.259 2.424.972 3.3l-7.235 24.892zm-96.925 111.524h.132l-.837 12.275h-34.464v-.127l3.024-3.663v-33.168l-3.024-3.663v-.13h33.05l.512 10.672h-.126l-4.5-4.821h-15.497v10.734h9.579l3.921-3.342h.131v12.599h-.131l-3.921-3.344h-9.579v12.34H141.6zm-.289-50.403 3.534 3.663v.13h-14.206v-.13l3.533-3.663 1.738-33.168-2.959-3.663v-.127h14.596l10.545 27.187 9.775-27.187h14.403v.127l-2.639 3.663 2.446 33.168 3.341 3.663v.13h-17.296v-.13l3.987-3.663-1.8-25.58-10.546 29.373h-6.364l-11.382-29.053zm-40.789 49.891h.131l-1.545 12.787H72.421v-.192l3.024-3.598v-33.168l-3.024-3.663v-.13h17.234v.13l-3.795 3.663v30.981h13.952zm-34.556-49.891V99.571H57.027v14.333l2.959 3.663v.13H43.588v-.13l3.023-3.663V80.736l-3.023-3.663v-.127h16.397v.127l-2.959 3.663v12.342h14.595V80.736l-2.958-3.663v-.127H85.06v.127l-3.024 3.663v33.168l3.024 3.663v.13H68.663v-.13zm258.795 50.403h.131l-.837 12.275h-34.465v-.127l3.024-3.663v-33.168l-3.024-3.663v-.13h33.051l.513 10.672h-.128l-4.5-4.821h-15.497v10.734h9.579l3.922-3.342h.132v12.599h-.132l-3.922-3.344h-9.579v12.34h16.076zm-163.699-3.987 5.659-16.193 4.82 16.193zm12.41-24.489h-13.825v.13l2.381 3.663-12.537 33.168-3.218 3.663v.127h13.632v-.127l-3.152-3.663 2.188-6.363H179l1.864 6.363-3.344 3.663v.127h17.424v-.127l-3.345-3.663zM36.072 108.183h.128l-.579 6.749c-3.856 2.892-9.452 4.176-13.247 4.176C8.23 119.108 0 108.954 0 97.383 0 85.685 8.553 75.53 23.468 75.53c4.824 0 8.743.966 10.546 1.672l.452 12.856h-.132l-6.3-7.78c-1.607-.447-3.408-.64-5.274-.64-7.009 0-11.895 5.847-11.895 14.846 0 7.329 5.338 15.813 13.698 15.813 3.534 0 8.23-1.543 11.509-4.113m222.63 9.514h-16.4v-.13l3.025-3.663V80.736l-3.025-3.663v-.127h16.4v.127l-2.96 3.663v33.168l2.96 3.663zm-35.97 39.669h17.165v.128l-3.213 3.666V178h-.132l-5.078-4.307c-4.307 3.148-8.935 4.307-14.017 4.307-11.636 0-19.096-9.645-19.096-21.277 0-13.883 9.71-22.303 23.404-22.303 4.566 0 9.067.833 12.796 2.763l.385 11.182h-.127l-6.431-6.941c-1.992-.706-4.436-.898-6.75-.898-8.358 0-12.411 6.748-12.411 14.782 0 7.392 3.796 16.198 10.996 16.198 3.021 0 5.271-1.222 6.558-2.697v-7.649l-4.049-3.666zm-10.643-74.507h3.407c5.852 0 9.004 2.569 9.004 7.968 0 4.565-2.442 7.65-8.102 7.65-1.545 0-3.022-.193-4.309-.578zm-13.439 34.708v.13h17.681v-.13l-4.242-3.663v-10.605c2.123.513 5.017.706 7.846.706 8.68 0 15.045-5.205 15.045-13.625 0-8.103-5.336-13.434-17.038-13.434H198.65v.127l3.025 3.663v33.168zm90.911-4.885c-8.682 0-11.64-11.505-11.64-18.641 0-4.885 2.057-12.084 9.258-12.084 9.005 0 11.64 11.25 11.64 18.319 0 6.491-3.024 12.406-9.258 12.406m20.19-15.233c0-11.698-8.362-21.92-21.412-21.92-11.833 0-21.283 8.936-21.283 21.214 0 11.888 8.229 22.365 20.96 22.365 11.639 0 21.735-8.29 21.735-21.66m-35.333 38.382h12.924v.13l-2.956 3.663v23.527c0 11.055-5.594 14.849-16.592 14.849-12.087 0-17.742-4.053-17.742-15.169v-23.207l-3.025-3.663v-.13h16.783v.13l-3.344 3.663v23.207c0 6.81 3.279 8.354 8.681 8.354 5.337 0 8.616-1.672 8.616-8.354v-23.207l-3.345-3.663zm71.386 4.715v-2.179h1.461c.754 0 1.549.159 1.549 1.038 0 1.092-.813 1.141-1.717 1.141zm4.125-1.082c0-1.392-.825-2.008-2.495-2.008h-2.694v7.07h1.064v-3.066h1.243l1.859 3.066h1.191l-1.997-3.116c1.032-.133 1.829-.68 1.829-1.946m-2.825 6.637c-2.802 0-4.995-2.176-4.995-5.132 0-2.897 2.193-5.086 4.995-5.086 2.774 0 4.971 2.189 4.971 5.086 0 2.956-2.197 5.132-4.971 5.132m0-11.243c-3.368 0-6.228 2.598-6.228 6.111 0 3.557 2.86 6.151 6.228 6.151 3.34 0 6.204-2.594 6.204-6.151 0-3.513-2.864-6.111-6.204-6.111m-1.676-57.912h13.5v.127l-3.02 3.663v36.961h-7.717l-20.638-30.79v26.997l3.985 3.663v.13h-13.567v-.13l3.025-3.663V80.736l-3.025-3.663v-.127h14.853l16.526 25.387V80.736l-3.922-3.663zM402 105.934c0 8.805-8.746 13.174-19.162 13.174-4.819 0-9.964-.706-14.21-2.635l-.449-12.211h.13l6.235 7.711c2.315.709 5.016 1.156 8.037 1.156 3.602 0 9.003-.897 9.003-5.138 0-3.667-3.535-4.95-10.736-6.941-9.325-2.573-13.633-6.301-13.633-12.534 0-9.643 9.324-12.987 19.034-12.987 4.627 0 8.676.773 12.537 2.249l.513 11.51h-.128l-6.172-6.688c-2.25-.708-4.758-1.028-7.458-1.028-3.215 0-8.297.774-8.297 4.694 0 3.406 2.251 4.307 9.645 6.364C396.278 95.265 402 97.642 402 105.934m-291.741-20.7 4.819 16.201h-10.48zm-6.817 32.333-3.152-3.663 2.188-6.363h14.404l1.864 6.363-3.345 3.663v.13h17.424v-.13l-3.344-3.663-12.473-36.958h-13.824v.127l2.381 3.663-12.538 33.168-3.217 3.663v.13h13.632z"/></svg>
+        <ul class="header-buttons"></ul>
       </div>
     </div>
-    <template id="player-template">
-      <div class="player_item">
-        <div class="player_photo_wrapper">
-          <img class="player_photo" src="" alt="" />
-          <div class="player_totalPoints_wrapper"></div>
-        </div>
-        <div class="player_running_line"></div>
-        <div class="player_name">
-          <p class="player_firstName"></p>
-          <p class="player_lastName"></p>
+    <div class="table-wrapper">
+      <div class="table-wrapper-inner">
+        <div class="table-wrapper-inner-deep">
+          <p>Очки</p>
+          <ul class="table"></ul>
         </div>
       </div>
-    </template>
-  </body>
+    </div>
+  </header>
+  <main>
+
+    <div class="squad-wrapper">
+      <div class="squad"></div>
+    </div>
+  </main>
+
+  <div class="popup">
+    <div class="popup-content">
+      <header>
+        <div class="button-wrapper">
+          <button type="button" </button>
+        </div>
+      </header>
+      <div class="player-header-wrapper">
+        <div class="player-header">
+          <div class="player-header-name">
+            <h1><span class="player-name-last"></span></h1>
+            <div class="player-header-team">
+              <img class="player-team-logo" src="" alt="" />
+              <p class="player-team-name"></p>
+            </div>
+            <p class="player-header-points"></p>
+          </div>
+          <div class="player-header-image-wrapper">
+            <img class="player-header-image" src="" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="player-page">
+        <div class="page">
+          <h2 class="player-title">Матчи</h2>
+          <div class="player-matches"></div>
+          <div class="player-match">
+            <div class="team-wrapper">
+              <p class="team-home"></p>
+              <img class="team-home-logo" src="" alt="" />
+            </div>
+            <div class="match-score-wrapper">
+              <p class="match-score"></p>
+            </div>
+            <div class="team-wrapper">
+              <p class="team-away"></p>
+              <img class="team-away-logo" src="" alt="" />
+            </div>
+          </div>
+          <div class="stats-wrapper">
+            <div class="match-stats stats"></div>
+          </div>
+          <h2 class="player-title">Этот сезон</h2>
+          <div class="stats-wrapper">
+            <div class="overall-stats stats"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="player-template">
+    <a class="player-item" href="#">
+      <div class="player-head">
+        <img class="avatar" src="" alt="" />
+        <img class="badge" src="" alt="" />
+      </div>
+      <p class="player-name"></p>
+      <p class="player-points"></p>
+    </a>
+  </template>
+</body>
 </html>

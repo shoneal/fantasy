@@ -1,730 +1,675 @@
 import { players } from "./players.js";
 import { activeTeams } from "./active-teams.js";
-import { teams } from "./teams.js";
-import { leagues } from "./leagues.js";
-import { terms } from "./terms.js";
+import { tables } from "./tables.js";
 
-for (const key in terms) {
-  if (terms[key].length >= 4) {
-    terms[key][3] =
-      terms[key][3].charAt(0).toUpperCase() + terms[key][3].slice(1);
-  }
-}
-function translate(term, value) {
-  const data = terms[term];
-  if (!data) return null;
+const basicLink = "https://shoneal.github.io/fantasy/images/";
 
-  // Объединяем проверки для undefined и true
-  if (value === undefined || value === true) {
-    return data.length > 3 ? data[3] : data[0];
-  }
+const teams = {
+  "Айнтрахт Франкфурт": "Eintracht-Frankfurt",
+  Аякс: "Ajax",
+  Арсенал: "Arsenal",
+  Аталанта: "Atalanta",
+  Атлетик: "Athletic",
+  Атлетико: "Atletico",
+  Байер: "Bayer",
+  Бавария: "Bayern",
+  Барселона: "Barcelona",
+  Бенфика: "Benfica",
+  "Боруссия Дортмунд": "Borussia-Dortmund",
+  "Буде-Глимт": "Bodo-Glimt",
+  Брюгге: "Brugge",
+  Вильярреал: "Villarreal",
+  Галатасарай: "Galatasaray",
+  Интер: "Inter",
+  Карабах: "Qarabag",
+  Кайрат: "Kairat",
+  Копенгаген: "Copenhagen",
+  Ливерпуль: "Liverpool",
+  "Манчестер Сити": "Manchester-City",
+  Марсель: "Marseille",
+  Монако: "Monaco",
+  Наполи: "Napoli",
+  Ньюкасл: "Newcastle",
+  Олимпиакос: "Olympiacos",
+  Пафос: "Pafos",
+  ПСВ: "PSV",
+  ПСЖ: "PSG",
+  "Реал Мадрид": "Real-Madrid",
+  Славия: "Slavia",
+  Спортинг: "Sporting",
+  Тоттенхэм: "Tottenham",
+  Челси: "Chelsea",
+  Ювентус: "Juventus",
+  Юнион: "Union",
+}; // Логотипы команд
+const terms = {
+  goals: ["гол", "гола", "голов"],
+  cleanSheet: ["сухой матч", "сухих матча", "сухих матчей"],
+  missedGoals: ["пропущенный гол", "пропущенных гола", "пропущенных голов"],
+  savingPenalty: ["отбитый пенальти", "отбитых пенальти", "отбитых пенальти"],
+  saves: ["сейв", "сейва", "сейвов"],
+  minutesOnField: ["минута на поле", "минуты на поле", "минут на поле"],
+  outsideTheBox: [
+    "гол из-за штрафной",
+    "гола из-за штрафной",
+    "голов из-за штрафной",
+  ],
+  playerOfTheMatch: [
+    "награда «Игрок матча»",
+    "награды «Игрок матча»",
+    "наград «Игрок матча»",
+    "Игрок матча",
+  ],
+  assists: ["голевой пас", "голевых паса", "голевых пасов"],
+  tackles: ["возврат владения", "возврата владения", "возвратов владения"],
+  earnedPenalty: [
+    "заработанный пенальти",
+    "заработанных пенальти",
+    "заработанных пенальти",
+  ],
+  concedingPenalty: [
+    "привезенный пенальти",
+    "привезенных пенальти",
+    "привезенных пенальти",
+  ],
+  missingPenalty: [
+    "незабитый пенальти",
+    "незабитых пенальти",
+    "незабитых пенальти",
+  ],
+  yellowCard: ["желтая карточка", "желтые карточки", "желтых карточек"],
+  redCard: ["красная карточка", "красные карточки", "красных карточек"],
+  ownGoal: ["автогол", "автогола", "автоголов"],
+  captain: ["тур «Капитан»", "тура «Капитан»", "туров «Капитан»", "Капитан"],
+  games: ["сыгранный матч", "сыгранных матча", "сыгранных матчей"],
+}; // Терминология правил
+const positions = {
+  goalkeepers: "вратари",
+  defenders: "защитники",
+  midfielders: "полузащитники",
+  forwards: "нападающие",
+}; // Позиции
+const body = {
+  buttons: document.querySelector(".header-buttons"),
+  table: document.querySelector(".table"),
+  squad: document.querySelector(".squad"),
+  popup: document.querySelector(".popup"),
+  template: document.getElementById("player-template"),
+}; // Элементы тела страницы
 
-  if (data.length === 1) return data[0];
-
-  const num = Math.abs(value) % 100;
-  const lastDigit = num % 10;
-
-  // Оптимизируем условные выражения
-  return num >= 11 && num <= 14
-    ? data[2]
-    : lastDigit === 1
-    ? data[0]
-    : lastDigit >= 2 && lastDigit <= 4
-    ? data[1]
-    : data[2];
-}
-const locationOfTheImages = "https://shoneal.github.io/fantasy/images/";
-
-const setupImageWithContainer = (img) => {
+const showImage = (img) => {
   const onLoadOrError = () => {
     img.style.opacity = "1";
-    img.removeEventListener("load", onLoadOrError);
-    img.removeEventListener("error", onLoadOrError);
   };
 
   if (img.complete) {
     onLoadOrError();
   } else {
-    img.addEventListener("load", onLoadOrError);
-    img.addEventListener("error", onLoadOrError);
+    img.addEventListener("load", onLoadOrError, { once: true });
+    img.addEventListener("error", onLoadOrError, { once: true });
   }
 }; // Функция для настройки прозрачности изображения
+function getTerm(number, termsArray) {
+  const n = number % 100;
+  if (n >= 11 && n <= 14) return termsArray[2];
+  return termsArray[n % 10 === 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 ? 1 : 2];
+} // Функция для определения нужного термина
 
-const headerButtons = document.querySelector(".header_buttons");
-function createButton(league, key, isActive) {
-  const button = document.createElement("button");
-  button.classList.add("header_button");
-  button.dataset.league = key;
-  button.style.setProperty("--button-background", league.button);
-  if (isActive) button.classList.add("header_button-is_active");
-  const img = document.createElement("img");
-  img.style.opacity = "0";
-  img.src = `${locationOfTheImages}logos/leagues/mini/${key}.png`;
-  img.alt = `Логотип чемпионата "${league.name}"`;
-  setupImageWithContainer(img);
-  button.appendChild(img);
+function calculatePoints(match) {
+  if (!match) return 0;
 
-  return button;
-}
-let isFirst = true;
-Object.keys(leagues).forEach((key) => {
-  headerButtons.appendChild(createButton(leagues[key], key, isFirst));
-  isFirst = false;
-}); // Главные кнопки в html
+  let points = 0;
+  const isCaptain = !!match?.captain;
 
-function calculateLeaguePoints() {
-  const leaguePoints = {};
+  for (const key in match) {
+    const value = match[key];
+    if (
+      Array.isArray(value) &&
+      value.length > 1 &&
+      typeof value[1] === "number"
+    ) {
+      points += value[1];
+    }
+  }
+
+  return isCaptain ? points * 2 : points;
+} // Подсчёт очков за один матч
+function calculatePlayerPoints(season) {
+  let totalPoints = 0;
+  const matches = Object.values(season);
+
+  for (let i = 0; i < matches.length; i++) {
+    totalPoints += calculatePoints(matches[i]);
+  }
+
+  return totalPoints;
+} // Подсчёт очков всех матчей одного игрока
+function calculateSeasonPoints(season) {
+  let totalPoints = 0;
 
   for (const position of Object.values(players)) {
     for (const player of Object.values(position)) {
-      if (!player.stats) continue;
-
-      for (const [league, stats] of Object.entries(player.stats)) {
-        leaguePoints[league] = leaguePoints[league] || 0;
-        leaguePoints[league] += calculatePlayerPoints(stats);
-      }
+      const seasonStats = player.stats?.[season];
+      if (!seasonStats) continue;
+      totalPoints += calculatePlayerPoints(seasonStats);
     }
   }
 
-  return leaguePoints;
-}
-function calculatePlayerPoints(stats) {
-  let totalPoints = 0;
-
-  for (const match of Object.values(stats)) {
-    let matchPoints = 0;
-
-    for (const key in match) {
-      const value =
-        Array.isArray(match[key]) && typeof match[key][1] === "number"
-          ? match[key][1]
-          : 0;
-      matchPoints += value;
-    }
-
-    if (match.captain) matchPoints *= 2;
-    totalPoints += matchPoints;
-  }
   return totalPoints;
-} // Функция для подсчета очков игрока
-const totalPoints = calculateLeaguePoints(); // Сумма очков по лигам
-function calculateScore(leagueKey) {
-  return (
-    totalPoints[leagueKey] +
-    (function () {
-      switch (leagueKey) {
-        case "ucl":
-          return -8;
-        case "laLiga":
-          return 1;
-        default:
-          return 0;
-      }
-    })()
-  );
-} // Сумма очков по лигам с вычетом/добавлением условий
+} // Подсчёт всех очков всех игроков
 
-const headerElements = {
-  buttons: document.querySelectorAll(".header_button"),
-  top: document.querySelector(".header_top"),
-  topRight: document.querySelector(".header_top_right"),
-  logo: document.querySelector(".header_logo"),
-  logoBig: document.querySelector(".header_logo_transparent"),
-  title: document.querySelector(".header_title"),
-  points: document.querySelector(".header_points"),
-  runningLine: document.querySelector(".header_running_line"),
-  standings: document.querySelector(".main_standings")
-};
-const playersList = document.querySelector(".players_list");
-const playerTemplate = document.querySelector("#player-template").content;
-function createElements(container, { count = 0 } = {}) {
-  const frag = document.createDocumentFragment();
-  for (let i = 0; i < count; i++) {
-    frag.appendChild(document.createElement("p"));
-  }
-  container.appendChild(frag);
-}
-createElements(headerElements.runningLine, { count: 30 });
-createElements(playerTemplate.querySelector(".player_running_line"), {
-  count: 4
-});
-createElements(document.querySelector(".popup_running_line"), { count: 20 });
-let appState = {
-  currentLeagueKey: null
-};
-const BREAKPOINT = 1280;
-const logoLink = `${locationOfTheImages}logos/leagues/big/`;
-const logoWhiteLink = `${logoLink}white/`;
-function updateLogo() {
-  headerElements.logo.src =
-    appState.currentLeagueKey === "seriaA"
-      ? `${logoLink}${appState.currentLeagueKey}.png`
-      : window.innerWidth < BREAKPOINT
-      ? `${logoWhiteLink}${appState.currentLeagueKey}.png`
-      : `${logoLink}${appState.currentLeagueKey}.png`;
-}
-function updateHeaderAndCSS(leagueKey) {
-  appState.currentLeagueKey = leagueKey;
-  const league = leagues[leagueKey];
+function initializeHeaderButtons() {
+  const seasons = Object.keys(tables);
+  seasons.sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
+  const fragment = document.createDocumentFragment();
+  seasons.forEach((season) => {
+    const li = document.createElement("li");
 
-  const imagesToLoad = [headerElements.logo, headerElements.logoBig];
-  imagesToLoad.forEach((el) => (el.style.opacity = 0));
-  headerElements.topRight.style.opacity = 0;
+    const a = document.createElement("a");
+    a.href = "#";
+    a.textContent = "20" + season;
+    a.dataset.season = season;
 
-  document.documentElement.style.setProperty(
-    "--background-header-from-js",
-    league.background
-  );
-  headerElements.title.textContent = league.name;
-  headerElements.points.textContent = calculateScore(leagueKey);
-  headerElements.logoBig.src = `${logoWhiteLink}${leagueKey}.png`;
-  headerElements.logo.alt = headerElements.logoBig.alt = `Логотип ${league.name}`;
+    li.appendChild(a);
+    fragment.appendChild(li);
+  });
+  body.buttons.appendChild(fragment);
+  body.buttons.addEventListener("click", handleSeasonClick);
+} // Добавление главных кнопок в html
+function handleSeasonClick(e) {
+  const target = e.target.closest("a");
+  if (!target) return;
 
-  let loaded = 0;
-  const onLoad = () => {
-    if (++loaded === imagesToLoad.length) {
-      imagesToLoad.forEach((el, index) => {
-        el.style.opacity = [1, 0.16][index];
-      });
-      headerElements.topRight.style.opacity = 1;
-    }
-  };
-  imagesToLoad.forEach((el) => {
-    if (el.complete) onLoad();
-    el.addEventListener("load", onLoad);
+  e.preventDefault();
+
+  body.buttons.querySelectorAll("a.is-active").forEach((btn) => {
+    btn.classList.remove("is-active");
+    btn.tabIndex = 0;
   });
 
-  headerElements.runningLine
-    .querySelectorAll("p")
-    .forEach((p) => (p.textContent = league.name));
+  target.classList.add("is-active");
+  target.tabIndex = -1;
 
-  updateLogo();
+  const season = target.dataset.season;
+  renderSeasonTable(season);
+  renderSquad(season);
+} // Переключение кнопок в шапке
 
-  const players = Object.entries(league.players)
+function renderSeasonTable(season) {
+  const seasonData = tables[season] || {};
+  const myPoints = Math.max(0, calculateSeasonPoints(season) - seasonData["Я"]);
+
+  const fragment = document.createDocumentFragment();
+
+  const players = Object.entries(seasonData)
+    .filter(([name]) => name !== "Я")
     .map(([name, points]) => ({ name, points, isMe: false }))
-    .concat({ name: "Я", points: calculateScore(leagueKey), isMe: true })
+    .concat({ name: "Я", points: myPoints, isMe: true })
     .sort((a, b) => b.points - a.points);
-  headerElements.standings
-    .querySelectorAll(".standings_team")
-    .forEach((el) => el.remove());
-  const rows = players.map((player, idx) => {
-    const row = document.createElement("div");
-    row.className = player.isMe
-      ? "standings_team standings_team_is-active"
-      : "standings_team";
 
-    row.innerHTML = `<p>${idx + 1}</p><p>${player.name}</p><p>${
-      player.points
-    }</p>`;
-    headerElements.standings.appendChild(row);
-    return row;
-  });
-  const myIndex = rows.findIndex((r) =>
-    r.classList.contains("standings_team_is-active")
-  );
-  if (myIndex !== -1) {
-    rows.forEach((row, idx) => {
-      if (![myIndex - 1, myIndex, myIndex + 1].includes(idx)) {
-        row.classList.add("standings_team_is-inactive");
-      }
-    });
+  const myIndex = players.findIndex((player) => player.isMe);
+
+  const template = document.createElement("li");
+  for (let i = 0; i < 3; i++) {
+    template.appendChild(document.createElement("span"));
   }
-}
-function renderPlayersList() {
-  const activeLeague = document.querySelector(".header_button-is_active")
-    ?.dataset.league;
 
-  playersList.innerHTML = Object.keys(players)
-    .map((position) => {
-      const count = Object.values(players[position]).filter(
-        (player) => player.stats?.[activeLeague]
-      ).length;
+  players.forEach((player, index) => {
+    const li = template.cloneNode(true);
 
-      return count
-        ? `
-        <h2 class="position_title">${position} - ${count}</h2>
-        <div class="position_container ${position}"></div>
-      `
-        : "";
-    })
-    .filter(Boolean)
-    .join("");
-} // Добавление div по позициям
+    li.children[0].textContent = index + 1;
+    li.children[1].textContent = player.name;
+    li.children[2].textContent = player.points;
 
-function createPlayerElement(playerData, leagueKey, parentKey, playerKey) {
-  const playerClone = playerTemplate.cloneNode(true);
-  const templateElements = {
-    player: playerClone.querySelector(".player_item"),
-    photo: playerClone.querySelector(".player_photo"),
-    firstName: playerClone.querySelector(".player_firstName"),
-    lastName: playerClone.querySelector(".player_lastName"),
-    pointsWrapper: playerClone.querySelector(".player_totalPoints_wrapper"),
-    runningLinePs: playerClone.querySelectorAll(".player_running_line p")
-  };
-  const popup = document.querySelector(".popup");
-  const linkToThePhoto = `${locationOfTheImages}players/${leagueKey}/${playerKey}.${
-    leagueKey === "pl" ? "png" : "webp"
-  }`;
+    if (player.isMe) li.classList.add("its-me");
 
-  templateElements.photo.style.opacity = "0";
-  templateElements.photo.src = linkToThePhoto;
-  templateElements.photo.alt = `${playerData.firstName} ${playerData.lastName}`;
-  if (templateElements.complete) templateElements.photo.style.opacity = "1";
-  templateElements.photo.addEventListener("load", () => {
-    templateElements.photo.style.opacity = "1";
+    if (Math.abs(index - myIndex) === 1) li.classList.add("my-neighbors");
+
+    fragment.appendChild(li);
   });
 
-  templateElements.firstName.textContent = playerData.firstName;
-  templateElements.lastName.textContent = playerData.lastName;
-  templateElements.pointsWrapper.innerHTML = "";
+  body.table.innerHTML = "";
+  body.table.appendChild(fragment);
+} // Создание таблицы
 
-  const stats = playerData.stats[leagueKey];
-  const points = stats ? calculatePlayerPoints(stats) : 0;
+function renderSquad(season) {
+  body.squad.innerHTML = "";
 
-  const divCount = points < 10 ? 4 : points > 99 ? 2 : 3;
+  const fragment = document.createDocumentFragment();
 
-  for (let i = 1; i <= divCount; i++) {
+  for (const [positionKey, positionData] of Object.entries(players)) {
     const div = document.createElement("div");
-    div.classList.add(`point-div-${i}`);
 
-    for (let j = 0; j < 8; j++) {
-      div.appendChild(document.createElement("p")).textContent = points;
-    }
+    const h2 = document.createElement("h2");
+    h2.textContent = positions[positionKey];
+    div.appendChild(h2);
 
-    templateElements.pointsWrapper.appendChild(div);
-  }
+    const ul = document.createElement("ul");
+    ul.className = "squad-list";
 
-  templateElements.runningLinePs.forEach(
-    (p) => (p.textContent = parentKey.slice(0, -1))
-  );
+    const sortedPlayers = Object.entries(positionData)
+      .filter(([_, playerData]) => playerData.stats[season])
+      .map(([playerKey, playerData]) => {
+        const playerPoints = calculatePlayerPoints(playerData.stats[season]);
+        return { playerKey, playerData, playerPoints };
+      })
+      .sort((a, b) => b.playerPoints - a.playerPoints);
 
-  templateElements.player.addEventListener("click", () => {
-    const popupElements = {
-      header: popup.querySelector(".popup_header"),
-      firstName: popup.querySelector(".popup_player_firstName"),
-      lastName: popup.querySelector(".popup_player_lastName"),
-      photo: popup.querySelector(".popup_player_photo"),
-      points: popup.querySelector(".popup_player_points"),
-      team: popup.querySelector(".popup_player_team"),
-      teamBig: popup.querySelector(".popup_player_team_big"),
-      runningLinePs: popup.querySelectorAll(".popup_running_line p"),
-      buttons: popup.querySelector(".popup_buttons"),
-      tourResult: popup.querySelector(".tour_result"),
-      tourStats: popup.querySelector(".tour_statistics"),
-      genStats: popup.querySelector(".general_statistics")
-    };
+    sortedPlayers.forEach(({ playerKey, playerData, playerPoints }) => {
+      const li = document.createElement("li");
 
-    // Инициализация popup
-    openPopup(popup);
-    addCloseOverlayListener(popup);
-    popup
-      .querySelector(".close")
-      .addEventListener("click", () => closePopup(popup));
+      const clone = body.template.content.cloneNode(true);
+      const avatar = clone.querySelector(".avatar");
+      const badge = clone.querySelector(".badge");
+      const name = clone.querySelector(".player-name");
+      const points = clone.querySelector(".player-points");
 
-    // Заполнение данных игрока
-    const teamInfo = activeTeams[playerData.team];
+      avatar.style.opacity = "0";
+      avatar.src = `${basicLink}players/${season.replace(
+        "/",
+        "-",
+      )}/basic/${playerKey}.jpg`;
+      avatar.alt = playerData.lastName;
+      showImage(avatar);
 
-    const elementsToLoad = [
-      popupElements.photo,
-      popupElements.team,
-      popupElements.teamBig
-    ];
-    elementsToLoad.forEach((el) => (el.style.opacity = 0));
-    popupElements.header.classList.remove(
-      ...Array.from(popupElements.header.classList).filter((cls) =>
-        cls.startsWith("popup_header_")
-      )
-    );
-    popupElements.header.classList.add(`popup_header_${leagueKey}`);
-    popupElements.firstName.textContent = playerData.firstName;
-    popupElements.lastName.textContent = playerData.lastName;
-    popupElements.photo.src = linkToThePhoto;
-    popupElements.photo.alt = `${playerData.firstName} ${playerData.lastName}`;
-    popupElements.points.textContent = stats ? calculatePlayerPoints(stats) : 0;
-    popupElements.team.src = `${locationOfTheImages}logos/teams/${
-      teams[playerData.team]
-    }.png`;
-    popupElements.teamBig.src = `${locationOfTheImages}logos/teams/white/${
-      teams[playerData.team]
-    }.png`;
-    popupElements.team.alt = popupElements.teamBig.alt = `Логотип футбольного клуба ${playerData.team}`;
-    popupElements.runningLinePs.forEach(
-      (p) => (p.textContent = parentKey.slice(0, -1))
-    );
-    let loaded = 0;
-    const onLoad = () => {
-      if (++loaded === elementsToLoad.length) {
-        elementsToLoad.forEach((el, index) => {
-          el.style.opacity = [1, 1, 0.16][index];
+      badge.style.opacity = "0";
+      badge.src = `${basicLink}team-logos/${teams[playerData.team]}.png`;
+      badge.alt = badge.title = playerData.team;
+      showImage(badge);
+
+      name.textContent = playerData.lastName;
+      points.textContent = `${playerPoints} оч.`;
+
+      li.appendChild(clone);
+
+      const link = li.querySelector("a");
+      if (link) {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          openPlayerPopup(
+            playerData,
+            playerKey,
+            season,
+            playerPoints,
+            badge.src,
+          );
         });
       }
-    };
-    elementsToLoad.forEach((el, index) => {
-      if (el.complete) onLoad();
-      el.addEventListener("load", onLoad);
+
+      ul.appendChild(li);
     });
 
-    // Создание кнопок туров
-    const opponents = teamInfo[`opponents_${leagueKey}`];
+    div.appendChild(ul);
+    fragment.appendChild(div);
+  }
 
-    const tourNumbers =
-      leagueKey === "ucl"
-        ? [
-            ...Array.from({ length: 8 }, (_, i) => i + 1),
-            "1/16(1)",
-            "1/16(2)",
-            "1/8(1)",
-            "1/8(2)",
-            "1/4(1)",
-            "1/4(2)",
-            "1/2(1)",
-            "1/2(2)",
-            "Final"
-          ]
-        : Array.from(
-            { length: opponents.length },
-            (_, i) =>
-              (leagueKey === "pl"
-                ? 7
-                : leagueKey === "laLiga"
-                ? 8
-                : leagueKey === "seriaA"
-                ? 6
-                : 1) + i
-          );
+  body.squad.innerHTML = "";
+  body.squad.appendChild(fragment);
+} // Вывод игроков
 
-    popupElements.buttons.innerHTML = "";
+const content = body.popup.querySelector(".popup-content");
+const popupElements = {
+  close: content.querySelector("header button"),
+  lastName: content.querySelector(".player-name-last"),
+  teamLogo: content.querySelector(".player-team-logo"),
+  teamName: content.querySelector(".player-team-name"),
+  playerPoints: content.querySelector(".player-header-points"),
+  photo: content.querySelector(".player-header-image"),
+  matches: content.querySelector(".player-matches"),
+  statsWrapper: content.querySelector(".match-stats").parentElement,
+  overallWrapper: content.querySelector(".overall-stats").parentElement,
+  stats: content.querySelector(".match-stats"),
+  overall: content.querySelector(".overall-stats"),
+  teamHome: content.querySelector(".team-home"),
+  teamAway: content.querySelector(".team-away"),
+  homeLogo: content.querySelector(".team-home-logo"),
+  awayLogo: content.querySelector(".team-away-logo"),
+  score: content.querySelector(".match-score"),
+}; // Элементы попапа
 
-    opponents.forEach((teamName, index) => {
-      const tourNumber = tourNumbers[index];
-      const isNumber = typeof tourNumber === "number";
-      const displayText = isNumber
-        ? `GW.${tourNumber}`
-        : tourNumber === "Final"
-        ? "Final"
-        : tourNumber.replace(/\s*\(\d\)$/, "");
+function openPlayerPopup(data, key, season, points, badge) {
+  const { lastName, teamLogo, teamName, playerPoints, photo } = popupElements;
 
-      const button = document.createElement("button");
-      const p = document.createElement("p");
-      const buttonWrapper = document.createElement("div");
-      const imgWrapper = document.createElement("div");
-      const img = document.createElement("img");
+  const firstName = document.querySelector(".player-name-first");
+  if (firstName) firstName.remove();
 
-      p.textContent = displayText;
-      img.src = `${locationOfTheImages}logos/teams/${teams[teamName]}.png`;
-      img.alt = `Логотип ${teamName}`;
+  if (data.firstName) {
+    const span = document.createElement("span");
+    span.className = "player-name-first";
+    span.textContent = data.firstName;
 
-      imgWrapper.classList.add("popup_button_img_wrapper");
-      buttonWrapper.classList.add("popup_button_wrapper");
+    lastName.parentNode.insertBefore(span, lastName);
+  }
 
-      imgWrapper.appendChild(img);
-      buttonWrapper.appendChild(imgWrapper);
-      button.appendChild(p);
-      button.appendChild(buttonWrapper);
+  lastName.textContent = data.lastName;
 
-      button.dataset.tour = tourNumber;
-      if (!stats[tourNumber]) button.classList.add("disabled");
+  teamLogo.style.opacity = "0";
+  teamLogo.src = badge;
+  teamLogo.alt = teamLogo.title = teamName.textContent = data.team;
+  showImage(teamLogo);
 
-      popupElements.buttons.appendChild(button);
-    });
+  playerPoints.textContent = `${points} оч.`;
 
-    // Создание цветов команды
-    const leftColor = `#${teamInfo.color[0]}`;
-    const rightColor = `#${teamInfo.color[1]}`;
-    document.documentElement.style.setProperty(
-      "--background-team-left",
-      leftColor
-    );
-    document.documentElement.style.setProperty(
-      "--background-team-right",
-      rightColor
-    );
+  photo.style.opacity = "0";
+  photo.src = `${basicLink}players/${season.replace(
+    "/",
+    "-",
+  )}/personal/${key}.webp`;
+  photo.alt = data.lastName;
+  showImage(photo);
 
-    // Находим активную кнопку
-    const activeButton = [...popupElements.buttons.children]
-      .filter((btn) => !btn.classList.contains("disabled"))
-      .pop();
+  generatePlayerMatches(data, season);
 
-    if (activeButton) activeButton.classList.add("active");
+  generateOverallStats(data, season);
 
-    // Очистка контейнеров
-    popupElements.tourResult.innerHTML = popupElements.tourStats.innerHTML = popupElements.genStats.innerHTML =
-      "";
+  openPopup(body.popup);
+  addCloseOverlayListener(body.popup);
+} // Открытие попапа
 
-    // Собираем общую статистику
-    const generalStats = {};
-    const booleanKeys = new Set();
-
-    for (const tour in stats) {
-      if (tour === "teams" || tour === "result") continue;
-      for (const key in stats[tour]) {
-        if (key === "teams" || key === "result") continue;
-        const value = stats[tour][key];
-
-        if (!generalStats[key]) generalStats[key] = [0, 0];
-
-        if (Array.isArray(value)) {
-          const firstValue = value[0] !== undefined ? value[0] : 0;
-          const secondValue = value[1] !== undefined ? value[1] : 0;
-
-          if (firstValue === true && typeof secondValue === "number") {
-            generalStats[key][0]++;
-            generalStats[key][1] += secondValue;
-            booleanKeys.add(key);
-          } else if (
-            typeof firstValue === "number" &&
-            typeof secondValue === "number"
-          ) {
-            generalStats[key][0] += firstValue;
-            generalStats[key][1] += secondValue;
-          } else if (typeof secondValue === "number") {
-            generalStats[key][1] += secondValue;
-          }
-        } else if (value === true) {
-          generalStats[key][0]++;
-          booleanKeys.add(key);
-        }
-      }
-    }
-
-    // Создаём и добавляем элемент с общим количеством матчей
-    const matchesCount = Object.keys(stats).filter(
-      (k) => !["teams", "result"].includes(k)
-    ).length;
-    const matchesP = document.createElement("p");
-    const matchesBaseText = translate("games", matchesCount);
-    matchesP.textContent = `${matchesCount} ${matchesBaseText}`;
-    popupElements.genStats.appendChild(matchesP);
-
-    // Отображаем общую статистику
-    const keys = Object.keys(generalStats);
-    const nonBoolean = keys.filter((key) => !booleanKeys.has(key));
-    const boolean = keys.filter((key) => booleanKeys.has(key));
-    const allKeys = [...nonBoolean, ...boolean];
-
-    allKeys.forEach((key) => {
-      const [count, sum] = generalStats[key];
-
-      const p = document.createElement("p");
-      const span = document.createElement("span");
-
-      const isValidKey = booleanKeys.has(key) || count !== 0;
-      const translateValue = isValidKey ? count : undefined;
-      const baseText = translate(key, translateValue);
-
-      p.textContent = isValidKey ? `${count} ${baseText}` : baseText;
-
-      if (key !== "captain") {
-        span.textContent = `${sum} оч.`;
-        span.classList.add("statistics_points");
-        p.textContent += ":";
-        p.appendChild(span);
-      }
-
-      popupElements.genStats.appendChild(p);
-
-      if (key === allKeys[allKeys.length - 1]) {
-        const totalP = document.createElement("p");
-        totalP.classList.add("statistics_total_points");
-        totalP.innerHTML = `Итого:<span>${points}</span> оч.`;
-        popupElements.genStats.appendChild(totalP);
-      }
-    });
-
-    // Функция обновления тура
-    const updateTour = (tourNumber) => {
-      popupElements.tourResult.innerHTML = popupElements.tourStats.innerHTML =
-        "";
-
-      const tourStats = stats[tourNumber];
-      if (!tourStats) return;
-
-      // Результат матча
-      const [homeTeam, awayTeam] = tourStats.teams;
-      const score = tourStats.result;
-      const [homeScore, awayScore] = score.split("-").map(Number);
-
-      const homeTeamElement = document.createElement("p");
-      homeTeamElement.textContent = homeTeam;
-
-      const homeLogo = document.createElement("img");
-      homeLogo.src = `${locationOfTheImages}logos/teams/${teams[homeTeam]}.png`;
-      homeLogo.alt = `Логотип ${homeTeam}`;
-
-      const awayTeamElement = document.createElement("p");
-      awayTeamElement.textContent = awayTeam;
-
-      const awayLogo = document.createElement("img");
-      awayLogo.src = `${locationOfTheImages}logos/teams/${teams[awayTeam]}.png`;
-      awayLogo.alt = `Логотип ${awayTeam}`;
-
-      [homeLogo, awayLogo].forEach((logo) => {
-        logo.style.opacity = "0";
-        setupImageWithContainer(logo);
-      });
-
-      const scoreElement = document.createElement("p");
-      scoreElement.classList.add("tour_score");
-      scoreElement.textContent = score;
-
-      [homeTeamElement, awayTeamElement].forEach((el) =>
-        el.classList.remove("loser")
-      );
-      if (homeScore < awayScore) {
-        homeTeamElement.classList.add("loser");
-      } else if (awayScore < homeScore) {
-        awayTeamElement.classList.add("loser");
-      }
-
-      [
-        homeTeamElement,
-        homeLogo,
-        scoreElement,
-        awayLogo,
-        awayTeamElement
-      ].forEach((element) => popupElements.tourResult.appendChild(element));
-
-      let totalPoints = 0;
-      // Статистика тура
-      for (const key in tourStats) {
-        if (key === "teams" || key === "result") continue;
-
-        const value = tourStats[key];
-        let [val1, val2] = ["", ""];
-
-        if (Array.isArray(value)) {
-          const firstValue = value[0] !== undefined ? value[0] : "";
-          const secondValue = value[1] !== undefined ? value[1] : "";
-
-          if (firstValue === true) {
-            val2 = secondValue;
-          } else if (
-            typeof firstValue === "number" &&
-            typeof secondValue === "number"
-          ) {
-            val1 = firstValue;
-            val2 = secondValue;
-          } else {
-            val1 = firstValue;
-            val2 = secondValue;
-          }
-        }
-
-        const p = document.createElement("p");
-        const span = document.createElement("span");
-        p.classList.value = "";
-
-        const baseText = translate(key, value[0] ?? undefined);
-        p.textContent = val1 ? `${val1} ${baseText}` : baseText;
-
-        if (val2 !== "") {
-          p.textContent += ":";
-          span.textContent = `${val2} оч.`;
-          span.classList.add("statistics_points");
-          p.appendChild(span);
-        }
-
-        if (key === "captain") {
-          p.classList.add("statistics_captain");
-        }
-
-        popupElements.tourStats.appendChild(p);
-
-        totalPoints += Number(val2);
-        if (key === "captain") {
-          totalPoints *= 2;
-        }
-        if (key === Object.keys(tourStats).at(-1)) {
-          const totalP = document.createElement("p");
-          totalP.classList.add("statistics_total_points");
-          totalP.innerHTML = `Итого:<span>${totalPoints}</span> оч.`;
-          popupElements.tourStats.appendChild(totalP);
-        }
-      }
-    };
-
-    // Инициализация активного тура
-    if (activeButton) {
-      updateTour(activeButton.dataset.tour);
-    }
-
-    // Обработчики кнопок
-    popupElements.buttons.addEventListener("click", (e) => {
-      const button = e.target.closest("button");
-      if (!button || button.classList.contains("disabled")) return;
-
-      popupElements.buttons
-        .querySelectorAll("button")
-        .forEach((btn) => btn.classList.remove("active"));
-
-      button.classList.add("active");
-      updateTour(button.dataset.tour);
-    });
-  });
-
-  return playerClone;
-}
-function addPlayers(position, leagueKey) {
-  playersList.classList.remove(
-    ...Array.from(playersList.classList).filter((cls) =>
-      cls.startsWith("players_list_")
-    )
-  );
-  playersList.classList.add(`players_list_${leagueKey}`);
-
-  const container = playersList.querySelector(`.${position}`);
+function generatePlayerMatches(data, season) {
+  const container = popupElements.matches;
   container.innerHTML = "";
 
-  const positionPlayers = players[position];
-  const validPlayers = [];
-  for (const playerKey in positionPlayers) {
-    const player = positionPlayers[playerKey];
-    if (player.stats[leagueKey]) {
-      validPlayers.push({
-        player,
-        playerKey,
-        points: calculatePlayerPoints(player.stats[leagueKey])
-      });
+  const seasonTeams = activeTeams[data.team]?.[season];
+  const playerStats = data.stats?.[season] || {};
+
+  if (!seasonTeams) return;
+
+  let lastMatchButton = null;
+
+  const stagesConfig = [
+    {
+      name: "Общий этап",
+      start: 0,
+      end: 8,
+      keys: Array.from({ length: 8 }, (_, i) => i + 1),
+      showMatchNumber: true,
+    },
+    {
+      name: "Стыковые матчи",
+      start: 8,
+      end: 10,
+      keys: ["1/16(1)", "1/16(2)"],
+    },
+    { name: "1/8 финала", start: 10, end: 12, keys: ["1/8(1)", "1/8(2)"] },
+    { name: "1/4 финала", start: 12, end: 14, keys: ["1/4(1)", "1/4(2)"] },
+    { name: "1/2 финала", start: 14, end: 16, keys: ["1/2(1)", "1/2(2)"] },
+    { name: "Финал", start: 16, end: 17, keys: ["Финал"] },
+  ];
+
+  for (const stage of stagesConfig) {
+    const matches = seasonTeams.slice(stage.start, stage.end);
+    if (!matches.length) continue;
+
+    const fragment = document.createDocumentFragment();
+
+    const stageDiv = document.createElement("div");
+    stageDiv.className = "player-matches-phases";
+    const h2 = document.createElement("h2");
+    h2.textContent = stage.name;
+    stageDiv.appendChild(h2);
+
+    if (
+      stage.name === "Стыковые матчи" &&
+      seasonTeams[8] === "" &&
+      seasonTeams[9] === ""
+    ) {
+      const span = document.createElement("span");
+      const spanInside = document.createElement("span");
+      spanInside.textContent = "Команда вышла в 1/8";
+      span.className = "status";
+      span.appendChild(spanInside);
+      stageDiv.appendChild(span);
+      container.appendChild(stageDiv);
+      continue;
+    }
+
+    const matchesDiv = document.createElement("div");
+    matchesDiv.className = "stage-matches";
+
+    for (let i = 0; i < matches.length; i++) {
+      if (!matches[i]) continue;
+
+      const matchKey = stage.keys[i];
+      const isPlayed = playerStats[matchKey] !== undefined;
+      const points = isPlayed ? calculatePoints(playerStats[matchKey]) : null;
+
+      const button = document.createElement("button");
+      button.dataset.match = matchKey;
+      button.className = isPlayed ? "match-button" : "match-button not-played";
+      button.disabled = !isPlayed;
+
+      if (isPlayed) {
+        button.addEventListener("click", () =>
+          handleMatchClick(matchKey, playerStats),
+        );
+        lastMatchButton = button;
+      }
+
+      if (stage.showMatchNumber) {
+        const numberSpan = document.createElement("span");
+        numberSpan.textContent = (i + 1).toString();
+        button.appendChild(numberSpan);
+      }
+
+      const img = document.createElement("img");
+      img.style.opacity = "0";
+      img.src = `${basicLink}team-logos/${teams[matches[i]]}.png`;
+      img.alt = matches[i];
+      showImage(img);
+      button.appendChild(img);
+
+      if (isPlayed) {
+        const pointsSpan = document.createElement("span");
+        pointsSpan.textContent = `${points} оч.`;
+        button.appendChild(pointsSpan);
+      }
+
+      matchesDiv.appendChild(button);
+    }
+
+    stageDiv.appendChild(matchesDiv);
+    fragment.appendChild(stageDiv);
+    container.appendChild(fragment);
+  }
+
+  if (lastMatchButton) {
+    lastMatchButton.classList.add("is-active");
+    const matchKey = lastMatchButton.dataset.match;
+    displayMatchStats(playerStats[matchKey]);
+    displayMatchInfo(playerStats[matchKey]);
+  }
+} // Генерация блоков с кнопками матчей
+function handleMatchClick(key, stats) {
+  const [currentActive, newActive] = [
+    document.querySelector(".match-button.is-active"),
+    document.querySelector(`[data-match="${key}"]`),
+  ];
+
+  if (currentActive) currentActive.classList.remove("is-active");
+
+  if (newActive) newActive.classList.add("is-active");
+
+  displayMatchStats(stats[key]);
+
+  displayMatchInfo(stats[key]);
+} // Функция обработчика кликов по кнопкам с матчами
+
+function createStatsBlocks(stats, isOverall = false) {
+  const fragment = document.createDocumentFragment();
+  const specialKeys = new Set(["playerOfTheMatch", "captain"]);
+  const regularBlocks = [];
+  const specialBlocks = [];
+
+  for (const [key, value] of Object.entries(stats)) {
+    if (key === "teams" || key === "result") continue;
+
+    const termsData = terms[key] || [];
+    const statDiv = document.createElement("div");
+
+    if (specialKeys.has(key)) {
+      statDiv.className =
+        key === "playerOfTheMatch" ? "player-of-the-match" : key;
+    }
+
+    let count;
+    if ((!isOverall && !specialKeys.has(key)) || isOverall) {
+      const valueSpan = document.createElement("span");
+      valueSpan.className = specialKeys.has(key)
+        ? "selected stat-value"
+        : "stat-value";
+
+      if (isOverall) {
+        count = value.count;
+      } else {
+        count = Array.isArray(value) ? value[0] : value;
+        if (key === "cleanSheet" && count === true) count = 1;
+      }
+
+      valueSpan.textContent = count;
+      statDiv.appendChild(valueSpan);
+    }
+
+    const labelSpan = document.createElement("span");
+    const isSpecial = !isOverall && specialKeys.has(key);
+    labelSpan.className = isSpecial ? "selected stat-label" : "stat-label";
+    labelSpan.textContent = isSpecial
+      ? termsData[3]
+      : getTerm(count, termsData);
+    statDiv.appendChild(labelSpan);
+
+    if (key !== "captain") {
+      const pointsSpan = document.createElement("span");
+      pointsSpan.className = "stat-second-label";
+
+      const points = isOverall
+        ? value.points
+        : Array.isArray(value) && typeof value[1] === "number"
+          ? value[1]
+          : 0;
+
+      pointsSpan.textContent = `${points} оч.`;
+      statDiv.appendChild(pointsSpan);
+    }
+
+    (specialKeys.has(key) ? specialBlocks : regularBlocks).push(statDiv);
+  }
+
+  regularBlocks.forEach((block) => fragment.appendChild(block));
+  specialBlocks.forEach((block) => fragment.appendChild(block));
+
+  return fragment;
+} // Создание статистических блоков для стастики
+function createTotalStatsBlock(points) {
+  const div = document.createElement("div");
+  div.className = "total-stats";
+
+  const titleSpan = document.createElement("span");
+  titleSpan.className = "stat-label";
+  titleSpan.textContent = "Итого";
+
+  const pointsSpan = document.createElement("span");
+  pointsSpan.className = "stat-value";
+  pointsSpan.textContent = `${points} оч.`;
+
+  div.append(titleSpan, pointsSpan);
+
+  return div;
+} // Создание итогового блока для стастики
+function displayMatchStats(matchStats) {
+  const wrapper = popupElements.statsWrapper;
+  const total = wrapper.querySelector(".total-stats");
+  if (total) total.remove();
+
+  const container = popupElements.stats;
+  container.innerHTML = "";
+  if (!matchStats) return;
+
+  const statsBlocks = createStatsBlocks(matchStats, false);
+
+  const totalStats = createTotalStatsBlock(calculatePoints(matchStats));
+
+  container.appendChild(statsBlocks);
+  wrapper.appendChild(totalStats);
+} // Отображение статистики матча
+
+function displayMatchInfo(matchStats) {
+  if (!matchStats.teams) return;
+
+  const { teamHome, homeLogo, teamAway, awayLogo, score } = popupElements;
+
+  const updateTeam = (team, logo, name) => {
+    logo.style.opacity = "0";
+    logo.src = `${basicLink}team-logos/${teams[name]}.png`;
+    team.textContent = logo.alt = logo.title = name;
+    showImage(logo);
+  };
+
+  updateTeam(teamHome, homeLogo, matchStats.teams[0]);
+  updateTeam(teamAway, awayLogo, matchStats.teams[1]);
+
+  score.textContent = matchStats.result;
+} // Отображение конкретного матча
+
+function generateOverallStats(data, season) {
+  const wrapper = popupElements.overallWrapper;
+  const total = wrapper.querySelector(".total-stats");
+  if (total) total.remove();
+
+  const container = popupElements.overall;
+  container.innerHTML = "";
+
+  const seasonStats = data.stats?.[season];
+  if (!seasonStats) return;
+
+  const overallStats = {};
+  let totalMatches = 0;
+
+  for (const match of Object.values(seasonStats)) {
+    totalMatches++;
+
+    for (const [key, value] of Object.entries(match)) {
+      if (key === "teams" || key === "result") continue;
+
+      if (!overallStats[key]) {
+        overallStats[key] = { count: 0, points: 0 };
+      }
+
+      const stat = overallStats[key];
+
+      if (Array.isArray(value)) {
+        stat.count += value[0];
+        stat.points += typeof value[1] === "number" ? value[1] : 0;
+      } else if (value === true) {
+        stat.count += 1;
+      }
     }
   }
-  validPlayers.sort((a, b) => a.points - b.points);
-  const fragment = document.createDocumentFragment();
-  for (const { player, playerKey } of validPlayers) {
-    fragment.appendChild(
-      createPlayerElement(player, leagueKey, position, playerKey)
-    );
-  }
-  container.appendChild(fragment);
-}
-function updatePlayers(leagueKey) {
-  Object.keys(players).forEach((position) => {
-    addPlayers(position, leagueKey);
-  });
-}
-function handleButtonClick(button) {
-  headerElements.buttons.forEach((btn) =>
-    btn.classList.remove("header_button-is_active")
+
+  overallStats.games = { count: totalMatches, points: 0 };
+
+  const statsBlocks = createStatsBlocks(
+    Object.fromEntries(
+      Object.entries(overallStats).filter(([key]) => key !== "games"),
+    ),
+    true,
   );
-  button.classList.add("header_button-is_active");
 
-  const leagueKey = button.dataset.league;
+  const gamesDiv = document.createElement("div");
+  const gamesValue = document.createElement("span");
+  const gamesLabel = document.createElement("span");
+  gamesValue.className = "stat-value";
+  gamesLabel.className = "stat-label";
+  gamesValue.textContent = totalMatches;
+  gamesLabel.textContent = getTerm(totalMatches, terms.games);
+  gamesDiv.append(gamesValue, gamesLabel);
+  statsBlocks.insertBefore(gamesDiv, statsBlocks.firstChild);
 
-  renderPlayersList();
-  updateHeaderAndCSS(leagueKey);
-  updatePlayers(leagueKey);
-}
-function init() {
-  const activeButton = document.querySelector(".header_button-is_active");
-  if (activeButton) {
-    handleButtonClick(activeButton);
-  }
-}
-headerElements.buttons.forEach((button) => {
-  button.addEventListener("click", () => handleButtonClick(button));
-});
-document.addEventListener("DOMContentLoaded", () => {
-  init();
-}); // Всё, что касается обновления шапки с логотипом и списка игроков
+  const totalStats = createTotalStatsBlock(calculatePlayerPoints(seasonStats));
+
+  container.appendChild(statsBlocks);
+  wrapper.appendChild(totalStats);
+} // Отображение статистики общей
 
 function openPopup(popupElement) {
   const body = document.body;
@@ -756,4 +701,22 @@ function addCloseOverlayListener(element) {
     }
   });
 }
-window.addEventListener("resize", updateLogo);
+
+popupElements.close.addEventListener("click", () => closePopup(body.popup));
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeHeaderButtons(); // Главные кнопки в html
+
+  const firstButton = body.buttons.querySelector("a");
+  if (firstButton) {
+    const mockEvent = {
+      target: firstButton,
+      preventDefault: () => {},
+    };
+    handleSeasonClick(mockEvent);
+  } // Назначение активной кнопки
+
+  popupElements.close.appendChild(
+    document.querySelector("body > .header svg").cloneNode(true),
+  ); // Клонирование svg
+}); // Функции при инициализации страницы
