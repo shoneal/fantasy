@@ -93,6 +93,7 @@ const body = {
   buttons: document.querySelector(".header-buttons"),
   table: document.querySelector(".table"),
   squad: document.querySelector(".squad"),
+  footer: document.querySelector("footer"),
   popup: document.querySelector(".popup"),
   template: document.getElementById("player-template"),
 }; // Элементы тела страницы
@@ -239,6 +240,7 @@ function renderSquad(season) {
 
   for (const [positionKey, positionData] of Object.entries(players)) {
     const div = document.createElement("div");
+    div.className = "squad-role";
 
     const h2 = document.createElement("h2");
     h2.textContent = positions[positionKey];
@@ -274,7 +276,7 @@ function renderSquad(season) {
 
       badge.style.opacity = "0";
       badge.src = `${basicLink}team-logos/${teams[playerData.team]}.png`;
-      badge.alt = badge.title = playerData.team;
+      badge.alt = badge.parentElement.title = playerData.team;
       showImage(badge);
 
       name.textContent = playerData.lastName;
@@ -345,7 +347,10 @@ function openPlayerPopup(data, key, season, points, badge) {
 
   teamLogo.style.opacity = "0";
   teamLogo.src = badge;
-  teamLogo.alt = teamLogo.title = teamName.textContent = data.team;
+  teamLogo.alt =
+    teamLogo.parentElement.title =
+    teamName.textContent =
+      data.team;
   showImage(teamLogo);
 
   playerPoints.textContent = `${points} оч.`;
@@ -495,9 +500,14 @@ function handleMatchClick(key, stats) {
   displayMatchInfo(stats[key]);
 } // Функция обработчика кликов по кнопкам с матчами
 
+function toKebabCase(str) {
+  return str.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+} // camelCase в kebab‑case
 function createStatsBlocks(stats, isOverall = false) {
   const fragment = document.createDocumentFragment();
   const specialKeys = new Set(["playerOfTheMatch", "captain"]);
+  const cardsKeys = new Set(["yellowCard", "redCard"]);
+
   const regularBlocks = [];
   const specialBlocks = [];
 
@@ -507,9 +517,8 @@ function createStatsBlocks(stats, isOverall = false) {
     const termsData = terms[key] || [];
     const statDiv = document.createElement("div");
 
-    if (specialKeys.has(key)) {
-      statDiv.className =
-        key === "playerOfTheMatch" ? "player-of-the-match" : key;
+    if (specialKeys.has(key) || cardsKeys.has(key)) {
+      statDiv.className = toKebabCase(key);
     }
 
     let count;
@@ -517,7 +526,9 @@ function createStatsBlocks(stats, isOverall = false) {
       const valueSpan = document.createElement("span");
       valueSpan.className = specialKeys.has(key)
         ? "selected stat-value"
-        : "stat-value";
+        : cardsKeys.has(key)
+          ? "card stat-value"
+          : "stat-value";
 
       if (isOverall) {
         count = value.count;
@@ -719,4 +730,19 @@ document.addEventListener("DOMContentLoaded", function () {
   popupElements.close.appendChild(
     document.querySelector("body > .header svg").cloneNode(true),
   ); // Клонирование svg
+
+  content.appendChild(body.footer.cloneNode(true));
+  document.querySelectorAll("footer").forEach((element) => {
+    element.addEventListener("click", (e) => {
+      if (!e.target.closest("a")) return;
+
+      e.preventDefault();
+
+      if (e.target.closest(".popup")) {
+        body.popup.scrollTop = 0;
+      } else {
+        window.scrollTo(0, 0);
+      }
+    });
+  });
 }); // Функции при инициализации страницы

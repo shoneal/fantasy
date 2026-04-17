@@ -1,17 +1,26 @@
 @font-face {
-  font-family: "Manrope";
-  src: url(./Manrope.ttf) format("truetype");
+  font-family: "Golos Text";
+  src: url(./GolosText-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Golos Text";
+  src: url(./GolosText-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Golos Text";
+  src: url(./GolosText-SemiBold.ttf) format("truetype");
+  font-weight: 600;
   font-display: block;
 }
 
 @font-face {
   font-family: euro-icomoon;
   src: url(./euro-icomoon.ttf) format("truetype");
-  font-display: block;
-}
-
-@font-face {
-  font-family: euro-icomoon;
-  src: url(./euro-icomoon.woff) format("woff");
   font-display: block;
 }
