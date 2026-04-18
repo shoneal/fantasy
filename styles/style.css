@@ -439,8 +439,10 @@ main {
 
 .player-matches {
   display: flex;
-  border: 1px solid var(--border-color);
   border-radius: calc(var(--border-radius) / 2);
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
   overflow: auto;
   background-color: var(--primary-color);
 }
@@ -500,6 +502,10 @@ main {
 
 .match-button:not(:last-child) {
   border-right: 1px solid var(--match-button-border);
+}
+
+.match-button:not(.is-active) {
+  border-bottom: 1px solid var(--border-color);
 }
 
 .match-button:not(.not-played) {
