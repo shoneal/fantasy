@@ -89,10 +89,22 @@ const positions = {
   midfielders: "полузащитники",
   forwards: "нападающие",
 }; // Позиции
+const statistics = [
+  "Всего очков",
+  "Голы",
+  "Голевые пасы",
+  "Возвраты владения",
+  "Капитан",
+  "Игрок матча",
+  "Больше всего очков в&nbsp;одном матче",
+  "Всего очков в&nbsp;среднем за&nbsp;матч",
+  "Всего игроков по&nbsp;командам",
+]; // Показатели статистик
 const body = {
   buttons: document.querySelector(".header-buttons"),
   table: document.querySelector(".table"),
   squad: document.querySelector(".squad"),
+  statistics: document.querySelector(".statistics"),
   footer: document.querySelector("footer"),
   popup: document.querySelector(".popup"),
   template: document.getElementById("player-template"),
@@ -194,6 +206,7 @@ function handleSeasonClick(e) {
   const season = target.dataset.season;
   renderSeasonTable(season);
   renderSquad(season);
+  renderStatistics(season);
 } // Переключение кнопок в шапке
 
 function renderSeasonTable(season) {
@@ -309,6 +322,228 @@ function renderSquad(season) {
   body.squad.appendChild(fragment);
 } // Вывод игроков
 
+function renderStatistics(season) {
+  body.statistics.innerHTML = "";
+
+  const fragment = document.createDocumentFragment();
+
+  for (const statName of statistics) {
+    const normalized = statName.replace(/&nbsp;/g, " ");
+
+    const card = document.createElement("div");
+    card.className = "stats-data-card";
+
+    const headerDiv = document.createElement("div");
+    headerDiv.className = "header";
+
+    const h2 = document.createElement("h2");
+    h2.innerHTML = statName;
+
+    const top5 = getTop5(normalized, season);
+    const firstPlayer = createTop5Item(1, top5[0], normalized, season);
+
+    headerDiv.append(h2, firstPlayer);
+
+    const bodyDiv = document.createElement("div");
+    bodyDiv.className = "body";
+
+    for (let i = 1; i < Math.min(5, top5.length); i++) {
+      const playerItem = createTop5Item(i + 1, top5[i], normalized, season);
+      bodyDiv.appendChild(playerItem);
+    }
+
+    card.append(headerDiv, bodyDiv);
+    fragment.appendChild(card);
+  }
+
+  body.statistics.appendChild(fragment);
+} // Вывод топов-5
+function getTop5(statName, season) {
+  const allPlayers = [];
+  const teamsMap = new Map();
+
+  for (const [positionKey, positionData] of Object.entries(players)) {
+    for (const [playerKey, playerData] of Object.entries(positionData)) {
+      const seasonStats = playerData.stats[season];
+      if (!seasonStats) continue;
+
+      const gamesCount = Object.keys(seasonStats).length;
+      const totalPoints = calculatePlayerPoints(seasonStats);
+
+      const team = playerData.team;
+      if (team) {
+        let teamData = teamsMap.get(team);
+        if (!teamData) {
+          teamData = {
+            team,
+            value: 0,
+            totalGames: 0,
+            totalPoints: 0,
+          };
+          teamsMap.set(team, teamData);
+        }
+
+        teamData.value++;
+        teamData.totalGames += gamesCount;
+        teamData.totalPoints += totalPoints;
+      }
+
+      if (statName !== "Всего игроков по командам") {
+        let value = 0;
+
+        switch (statName) {
+          case "Всего очков":
+            value = totalPoints;
+            break;
+
+          case "Голы":
+            for (const match of Object.values(seasonStats)) {
+              value += match.goals?.[0] || 0;
+            }
+            break;
+
+          case "Голевые пасы":
+            for (const match of Object.values(seasonStats)) {
+              value += match.assists?.[0] || 0;
+            }
+            break;
+
+          case "Возвраты владения":
+            for (const match of Object.values(seasonStats)) {
+              value += match.tackles?.[0] || 0;
+            }
+            break;
+
+          case "Капитан":
+            for (const match of Object.values(seasonStats)) {
+              if (match.captain) value++;
+            }
+            break;
+
+          case "Игрок матча":
+            for (const match of Object.values(seasonStats)) {
+              if (match.playerOfTheMatch?.[0]) value++;
+            }
+            break;
+
+          case "Больше всего очков в одном матче": {
+            let maxPoints = 0;
+            for (const match of Object.values(seasonStats)) {
+              const points = calculatePoints(match);
+              if (points > maxPoints) maxPoints = points;
+            }
+            value = maxPoints;
+            break;
+          }
+
+          case "Всего очков в среднем за матч":
+            value = totalPoints / gamesCount;
+            break;
+        }
+
+        allPlayers.push({
+          playerKey,
+          playerData,
+          value,
+          gamesCount,
+          totalPoints,
+          team: playerData.team,
+        });
+      }
+    }
+  }
+
+  if (statName === "Всего игроков по командам") {
+    const teamsArray = Array.from(teamsMap.values());
+    return sortTop5(teamsArray);
+  } else {
+    return sortTop5(allPlayers);
+  }
+} // Функция для получения топ‑5 игроков по показателю
+function sortTop5(data) {
+  return data
+    .sort((a, b) => {
+      if (b.value !== a.value) return b.value - a.value;
+      if (b.games !== a.games) return b.games - a.games;
+      return b.points - a.points;
+    })
+    .slice(0, 5);
+} // Функция для сортировки топ‑5
+function createTop5Item(rank, data, statName, season) {
+  const item = document.createElement("div");
+  item.className = "stats-data-item";
+
+  const rankSpan = document.createElement("span");
+  rankSpan.textContent = rank.toString();
+  item.appendChild(rankSpan);
+
+  if (statName !== "Всего игроков по командам") {
+    const playerPoints = calculatePlayerPoints(data.playerData.stats[season]);
+    const badgeSrc = `${basicLink}team-logos/${teams[data.team]}.png`;
+
+    const link = document.createElement("a");
+    link.href = "#";
+
+    const imgDiv = document.createElement("div");
+
+    const avatar = document.createElement("img");
+    avatar.src = `${basicLink}players/${season.replace("/", "-")}/basic/${
+      data.playerKey
+    }.jpg`;
+    avatar.alt = data.playerData.lastName;
+
+    const badgeDiv = document.createElement("div");
+    const badge = document.createElement("img");
+    badge.src = badgeSrc;
+    badge.alt = badgeDiv.title = data.playerData.team;
+    badgeDiv.appendChild(badge);
+    imgDiv.append(avatar, badgeDiv);
+
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = data.playerData.lastName;
+    const teamSpan = document.createElement("span");
+    teamSpan.textContent = data.playerData.team;
+
+    link.append(imgDiv, nameSpan, teamSpan);
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      openPlayerPopup(
+        data.playerData,
+        data.playerKey,
+        season,
+        playerPoints,
+        badgeSrc,
+      );
+    });
+    item.appendChild(link);
+  } else {
+    const div = document.createElement("div");
+
+    const badgeDiv = document.createElement("div");
+    const badge = document.createElement("img");
+    badge.src = `${basicLink}team-logos/${teams[data.team]}.png`;
+    badge.alt = badgeDiv.title = data.team;
+    badgeDiv.appendChild(badge);
+
+    const teamSpan = document.createElement("span");
+    teamSpan.textContent = data.team;
+
+    div.append(badgeDiv, teamSpan);
+    item.appendChild(div);
+  }
+
+  const statSpan = document.createElement("span");
+  statSpan.textContent =
+    statName === "Всего очков в среднем за матч"
+      ? data.value.toFixed(1)
+      : Math.round(data.value).toString();
+
+  item.appendChild(statSpan);
+
+  return item;
+} // Функция для создания элемента игрока/команды в топ-5
+
 const content = body.popup.querySelector(".popup-content");
 const popupElements = {
   close: content.querySelector("header button"),
@@ -367,6 +602,7 @@ function openPlayerPopup(data, key, season, points, badge) {
 
   generateOverallStats(data, season);
 
+  body.popup.scrollTop = 0;
   openPopup(body.popup);
   addCloseOverlayListener(body.popup);
 } // Открытие попапа
@@ -484,6 +720,10 @@ function generatePlayerMatches(data, season) {
     displayMatchStats(playerStats[matchKey]);
     displayMatchInfo(playerStats[matchKey]);
   }
+
+  const active = container.querySelector(".is-active");
+  container.scrollLeft =
+    active.offsetLeft + active.offsetWidth / 2 - container.clientWidth;
 } // Генерация блоков с кнопками матчей
 function handleMatchClick(key, stats) {
   const [currentActive, newActive] = [
@@ -744,5 +984,5 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo(0, 0);
       }
     });
-  });
+  }); // Клонирование footer
 }); // Функции при инициализации страницы
