@@ -474,7 +474,7 @@ main {
   background-size: cover;
 }
 
-.player-header-wrapper::before {
+.player-header-wrapper.personal::before {
   content: "";
   position: absolute;
   top: 0;
@@ -495,12 +495,27 @@ main {
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
   max-width: var(--main-width);
   margin: 0 auto;
   padding-top: 24px;
   color: var(--primary-color);
+}
+
+.basic .player-header {
+  flex-direction: column-reverse;
+  gap: 8px;
+  padding-bottom: 24px;
+}
+
+.personal .player-header {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-header-name {
+  position: relative;
+  z-index: 4;
 }
 
 .player-header-name h1 {
@@ -548,12 +563,23 @@ main {
   backdrop-filter: blur(10px);
 }
 
-.player-header-image-wrapper {
+.basic .player-header-image-wrapper {
+  width: 196px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.personal .player-header-image-wrapper {
   width: 440px;
 }
 
 .player-header-image {
   width: 100%;
+}
+
+.basic .player-header-image {
+  position: relative;
+  z-index: 2;
 }
 
 .player-page {
@@ -925,7 +951,11 @@ footer svg {
     width: 100%;
   }
 
-  .table li:not(.its-me):not(.my-neighbors) {
+  .table li.first-place {
+    border-bottom: 1px solid #ffffff40;
+  }
+
+  .table li:not(.first-place):not(.its-me):not(.my-neighbors) {
     display: none;
   }
 
@@ -949,7 +979,7 @@ footer svg {
     width: 16px;
   }
 
-  .player-header-image-wrapper {
+  .personal .player-header-image-wrapper {
     width: 276px;
   }
 
@@ -1025,20 +1055,27 @@ footer svg {
         var(--header-background) 87.34%
       )
       fill 1;
-    padding: var(--margin-desktop) 0;
     background-image: var(--header-image);
+  }
+
+  .player-header-wrapper.personal {
+    padding: var(--margin-desktop) 0;
   }
 
   .player-header-wrapper::before {
     display: none;
   }
 
-  .player-header {
+  .basic .player-header {
+    padding: var(--margin-desktop) 0;
+  }
+
+  .personal .player-header {
     padding: 0;
     aspect-ratio: 25 / 30;
   }
 
-  .player-header-name {
+  .personal .player-header-name {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1047,7 +1084,7 @@ footer svg {
     padding: 0 var(--margin-desktop);
   }
 
-  .player-header-image-wrapper {
+  .personal .player-header-image-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -1120,5 +1157,11 @@ footer svg {
   .total-stats .stat-value {
     font-weight: 600;
     font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  :root {
+    --margin-desktop: 8px;
   }
 }

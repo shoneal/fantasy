@@ -237,6 +237,8 @@ function renderSeasonTable(season) {
 
     if (player.isMe) li.classList.add("its-me");
 
+    if (index === 0 && !player.isMe) li.classList.add("first-place");
+
     if (Math.abs(index - myIndex) === 1) li.classList.add("my-neighbors");
 
     fragment.appendChild(li);
@@ -547,6 +549,7 @@ function createTop5Item(rank, data, statName, season) {
 const content = body.popup.querySelector(".popup-content");
 const popupElements = {
   close: content.querySelector("header button"),
+  wrapper: content.querySelector(".player-header-wrapper"),
   lastName: content.querySelector(".player-name-last"),
   teamLogo: content.querySelector(".player-team-logo"),
   teamName: content.querySelector(".player-team-name"),
@@ -565,7 +568,11 @@ const popupElements = {
 }; // Элементы попапа
 
 function openPlayerPopup(data, key, season, points, badge) {
-  const { lastName, teamLogo, teamName, playerPoints, photo } = popupElements;
+  const { wrapper, lastName, teamLogo, teamName, playerPoints, photo } =
+    popupElements;
+
+  wrapper.classList.remove("basic", "personal");
+  wrapper.classList.add(data.onePhoto ? "basic" : "personal");
 
   const firstName = document.querySelector(".player-name-first");
   if (firstName) firstName.remove();
@@ -591,10 +598,9 @@ function openPlayerPopup(data, key, season, points, badge) {
   playerPoints.textContent = `${points} оч.`;
 
   photo.style.opacity = "0";
-  photo.src = `${basicLink}players/${season.replace(
-    "/",
-    "-",
-  )}/personal/${key}.webp`;
+  photo.src = `${basicLink}players/${season.replace("/", "-")}/${
+    data.onePhoto ? "basic" : "personal"
+  }/${key}.${data.onePhoto ? "jpg" : "webp"}`;
   photo.alt = data.lastName;
   showImage(photo);
 
@@ -611,69 +617,59 @@ function generatePlayerMatches(data, season) {
   const container = popupElements.matches;
   container.innerHTML = "";
 
-  const seasonTeams = activeTeams[data.team]?.[season];
-  const playerStats = data.stats?.[season] || {};
-
-  if (!seasonTeams) return;
+  const seasonTeams = activeTeams[data.team][season];
+  const playerStats = data.stats[season];
 
   let lastMatchButton = null;
 
   const stagesConfig = [
-    {
-      name: "Общий этап",
-      start: 0,
-      end: 8,
-      keys: Array.from({ length: 8 }, (_, i) => i + 1),
-      showMatchNumber: true,
-    },
-    {
-      name: "Стыковые матчи",
-      start: 8,
-      end: 10,
-      keys: ["1/16(1)", "1/16(2)"],
-    },
-    { name: "1/8 финала", start: 10, end: 12, keys: ["1/8(1)", "1/8(2)"] },
-    { name: "1/4 финала", start: 12, end: 14, keys: ["1/4(1)", "1/4(2)"] },
-    { name: "1/2 финала", start: 14, end: 16, keys: ["1/2(1)", "1/2(2)"] },
-    { name: "Финал", start: 16, end: 17, keys: ["Финал"] },
+    { name: "Общий этап", keys: Array.from({ length: 8 }, (_, i) => i + 1) },
+    { name: "Стыковые матчи", keys: ["1/16(1)", "1/16(2)"] },
+    { name: "1/8 финала", keys: ["1/8(1)", "1/8(2)"] },
+    { name: "1/4 финала", keys: ["1/4(1)", "1/4(2)"] },
+    { name: "1/2 финала", keys: ["1/2(1)", "1/2(2)"] },
+    { name: "Финал", keys: ["Финал"] },
   ];
 
   for (const stage of stagesConfig) {
-    const matches = seasonTeams.slice(stage.start, stage.end);
-    if (!matches.length) continue;
+    const stageMatches = stage.keys.filter((key) => seasonTeams[key]);
+
+    if (stageMatches.length === 0) {
+      if (
+        stage.name === "Стыковые матчи" &&
+        (seasonTeams["1/8(1)"] || seasonTeams["1/8(2)"])
+      ) {
+        const stageDiv = document.createElement("div");
+        stageDiv.className = "player-matches-phases";
+        const h2 = document.createElement("h2");
+        h2.textContent = stage.name;
+        stageDiv.appendChild(h2);
+
+        const span = document.createElement("span");
+        const spanInside = document.createElement("span");
+        spanInside.textContent = "Команда вышла в 1/8";
+        span.className = "status";
+        span.appendChild(spanInside);
+        stageDiv.appendChild(span);
+        container.appendChild(stageDiv);
+      }
+      continue;
+    }
 
     const fragment = document.createDocumentFragment();
-
     const stageDiv = document.createElement("div");
     stageDiv.className = "player-matches-phases";
     const h2 = document.createElement("h2");
     h2.textContent = stage.name;
     stageDiv.appendChild(h2);
 
-    if (
-      stage.name === "Стыковые матчи" &&
-      seasonTeams[8] === "" &&
-      seasonTeams[9] === ""
-    ) {
-      const span = document.createElement("span");
-      const spanInside = document.createElement("span");
-      spanInside.textContent = "Команда вышла в 1/8";
-      span.className = "status";
-      span.appendChild(spanInside);
-      stageDiv.appendChild(span);
-      container.appendChild(stageDiv);
-      continue;
-    }
-
     const matchesDiv = document.createElement("div");
     matchesDiv.className = "stage-matches";
 
-    for (let i = 0; i < matches.length; i++) {
-      if (!matches[i]) continue;
-
-      const matchKey = stage.keys[i];
-      const isPlayed = playerStats[matchKey] !== undefined;
-      const points = isPlayed ? calculatePoints(playerStats[matchKey]) : null;
+    for (const matchKey of stageMatches) {
+      const stats = playerStats[matchKey];
+      const isPlayed = !!stats;
+      const points = isPlayed ? calculatePoints(stats) : null;
 
       const button = document.createElement("button");
       button.dataset.match = matchKey;
@@ -682,21 +678,21 @@ function generatePlayerMatches(data, season) {
 
       if (isPlayed) {
         button.addEventListener("click", () =>
-          handleMatchClick(matchKey, playerStats),
+          handleMatchClick(matchKey, playerStats, seasonTeams, data.team),
         );
         lastMatchButton = button;
       }
 
-      if (stage.showMatchNumber) {
+      if (stage.name === "Общий этап") {
         const numberSpan = document.createElement("span");
-        numberSpan.textContent = (i + 1).toString();
+        numberSpan.textContent = matchKey.toString();
         button.appendChild(numberSpan);
       }
 
       const img = document.createElement("img");
       img.style.opacity = "0";
-      img.src = `${basicLink}team-logos/${teams[matches[i]]}.png`;
-      img.alt = matches[i];
+      img.src = `${basicLink}team-logos/${teams[seasonTeams[matchKey][0]]}.png`;
+      img.alt = seasonTeams[matchKey][0];
       showImage(img);
       button.appendChild(img);
 
@@ -716,28 +712,34 @@ function generatePlayerMatches(data, season) {
 
   if (lastMatchButton) {
     lastMatchButton.classList.add("is-active");
+    lastMatchButton.disabled = true;
     const matchKey = lastMatchButton.dataset.match;
     displayMatchStats(playerStats[matchKey]);
-    displayMatchInfo(playerStats[matchKey]);
+    displayMatchInfo(playerStats[matchKey], seasonTeams[matchKey], data.team);
   }
 
   const active = container.querySelector(".is-active");
-  container.scrollLeft =
-    active.offsetLeft + active.offsetWidth / 2 - container.clientWidth;
+  if (active) {
+    container.scrollLeft =
+      active.offsetLeft + active.offsetWidth - container.clientWidth;
+  }
 } // Генерация блоков с кнопками матчей
-function handleMatchClick(key, stats) {
-  const [currentActive, newActive] = [
-    document.querySelector(".match-button.is-active"),
-    document.querySelector(`[data-match="${key}"]`),
-  ];
+function handleMatchClick(key, stats, seasonTeams, playerTeam) {
+  const currentActive = document.querySelector(".match-button.is-active");
+  const newActive = document.querySelector(`[data-match="${key}"]`);
 
-  if (currentActive) currentActive.classList.remove("is-active");
+  if (currentActive) {
+    currentActive.classList.remove("is-active");
+    currentActive.disabled = false;
+  }
 
-  if (newActive) newActive.classList.add("is-active");
+  if (newActive) {
+    newActive.classList.add("is-active");
+    newActive.disabled = true;
+  }
 
   displayMatchStats(stats[key]);
-
-  displayMatchInfo(stats[key]);
+  displayMatchInfo(stats[key], seasonTeams[key], playerTeam);
 } // Функция обработчика кликов по кнопкам с матчами
 
 function toKebabCase(str) {
@@ -844,22 +846,28 @@ function displayMatchStats(matchStats) {
   wrapper.appendChild(totalStats);
 } // Отображение статистики матча
 
-function displayMatchInfo(matchStats) {
-  if (!matchStats.teams) return;
+function displayMatchInfo(matchStats, matchData, playerTeam) {
+  if (!matchData) return;
 
   const { teamHome, homeLogo, teamAway, awayLogo, score } = popupElements;
+  const [opponent, location, result] = matchData;
 
-  const updateTeam = (team, logo, name) => {
-    logo.style.opacity = "0";
-    logo.src = `${basicLink}team-logos/${teams[name]}.png`;
-    team.textContent = logo.alt = logo.title = name;
-    showImage(logo);
+  const updateTeam = (nameEl, logoEl, teamName) => {
+    logoEl.style.opacity = "0";
+    logoEl.src = `${basicLink}team-logos/${teams[teamName]}.png`;
+    nameEl.textContent = logoEl.alt = logoEl.title = teamName;
+    showImage(logoEl);
   };
 
-  updateTeam(teamHome, homeLogo, matchStats.teams[0]);
-  updateTeam(teamAway, awayLogo, matchStats.teams[1]);
+  if (location === "H") {
+    updateTeam(teamHome, homeLogo, playerTeam);
+    updateTeam(teamAway, awayLogo, opponent);
+  } else {
+    updateTeam(teamHome, homeLogo, opponent);
+    updateTeam(teamAway, awayLogo, playerTeam);
+  }
 
-  score.textContent = matchStats.result;
+  score.textContent = result;
 } // Отображение конкретного матча
 
 function generateOverallStats(data, season) {
