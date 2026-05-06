@@ -119,6 +119,11 @@ export const players = {
             missedGoals: [1, 0],
             saves: [4, 1],
           },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            saves: [2, 0],
+          },
         },
       },
     },
@@ -214,6 +219,11 @@ export const players = {
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             tackles: [4, 1],
+          },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            tackles: [3, 1],
           },
         },
       },
@@ -316,6 +326,20 @@ export const players = {
         },
       },
     },
+    lewisSkelly: {
+      firstName: "Майлз",
+      lastName: "Льюис-Скелли",
+      team: "Арсенал",
+      stats: {
+        "25/26": {
+          "1/2(2)": {
+            minutesOnField: [74, 2],
+            cleanSheet: [true, 4],
+            tackles: [1, 0],
+          },
+        },
+      },
+    },
     nunoMendes: {
       lastName: "Нуну Мендеш",
       team: "ПСЖ",
@@ -409,6 +433,11 @@ export const players = {
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             tackles: [7, 2],
+          },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            tackles: [4, 1],
           },
         },
       },

@@ -237,9 +237,12 @@ function renderSeasonTable(season) {
 
     if (player.isMe) li.classList.add("its-me");
 
-    if (index === 0 && !player.isMe) li.classList.add("first-place");
+    const neighbors = Math.abs(index - myIndex) === 1;
 
-    if (Math.abs(index - myIndex) === 1) li.classList.add("my-neighbors");
+    if (neighbors) li.classList.add("my-neighbors");
+
+    if (index === 0 && !player.isMe && !neighbors)
+      li.classList.add("first-place");
 
     fragment.appendChild(li);
   });
