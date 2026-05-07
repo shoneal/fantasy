@@ -628,6 +628,11 @@ export const players = {
             assists: [2, 6],
             tackles: [2, 0],
           },
+          "1/2(2)": {
+            minutesOnField: [76, 2],
+            cleanSheet: [true, 1],
+            tackles: [1, 0],
+          },
         },
       },
     },
@@ -665,6 +670,10 @@ export const players = {
             minutesOnField: [90, 2],
             goals: [1, 5],
             tackles: [8, 2],
+          },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            tackles: [3, 1],
           },
         },
       },
@@ -758,6 +767,12 @@ export const players = {
           "1/2(1)": {
             minutesOnField: [84, 2],
             goals: [2, 10],
+          },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            assists: [1, 3],
+            yellowCard: [1, -1],
+            tackles: [6, 2],
           },
         },
       },
@@ -877,6 +892,10 @@ export const players = {
           "1/2(1)": {
             minutesOnField: [90, 2],
             goals: [1, 5],
+          },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            tackles: [4, 1],
           },
         },
       },
@@ -1055,6 +1074,11 @@ export const players = {
             playerOfTheMatch: [true, 3],
             captain: true,
           },
+          "1/2(2)": {
+            minutesOnField: [65, 2],
+            goals: [1, 4],
+            tackles: [1, 0],
+          },
         },
       },
     },
@@ -1197,6 +1221,12 @@ export const players = {
             assists: [1, 3],
             goals: [1, 4],
           },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            goals: [1, 4],
+            tackles: [1, 0],
+            captain: true,
+          },
         },
       },
     },
@@ -1225,6 +1255,10 @@ export const players = {
             goals: [1, 4],
             tackles: [3, 1],
             outsideTheBox: [1, 1],
+          },
+          "1/2(2)": {
+            minutesOnField: [90, 2],
+            yellowCard: [1, -1],
           },
         },
       },

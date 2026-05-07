@@ -91,6 +91,7 @@ const positions = {
 }; // Позиции
 const statistics = [
   "Всего очков",
+  "Сыграно матчей",
   "Голы",
   "Голевые пасы",
   "Возвраты владения",
@@ -401,6 +402,10 @@ function getTop5(statName, season) {
             value = totalPoints;
             break;
 
+          case "Сыграно матчей":
+            value = gamesCount;
+            break;
+
           case "Голы":
             for (const match of Object.values(seasonStats)) {
               value += match.goals?.[0] || 0;
@@ -469,8 +474,8 @@ function sortTop5(data) {
   return data
     .sort((a, b) => {
       if (b.value !== a.value) return b.value - a.value;
-      if (b.games !== a.games) return b.games - a.games;
-      return b.points - a.points;
+      if (b.gamesCount !== a.gamesCount) return b.gamesCount - a.gamesCount;
+      return b.totalPoints - a.totalPoints;
     })
     .slice(0, 5);
 } // Функция для сортировки топ‑5
