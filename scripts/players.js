@@ -127,6 +127,19 @@ export const players = {
         },
       },
     },
+    safonov: {
+      firstName: "Матвей",
+      lastName: "Сафонов",
+      team: "ПСЖ",
+      stats: {
+        "25/26": {
+          Финал: {
+            minutesOnField: [120, 2],
+            missedGoals: [1, 0],
+          },
+        },
+      },
+    },
   },
   defenders: {
     calafiori: {
@@ -278,6 +291,11 @@ export const players = {
             yellowCard: [1, -1],
             tackles: [1, 0],
           },
+          Финал: {
+            minutesOnField: [120, 2],
+            missedGoals: [1, 0],
+            tackles: [5, 1],
+          },
         },
       },
     },
@@ -337,6 +355,11 @@ export const players = {
             cleanSheet: [true, 4],
             tackles: [1, 0],
           },
+          Финал: {
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+            tackles: [2, 0],
+          },
         },
       },
     },
@@ -363,6 +386,12 @@ export const players = {
           "1/16(2)": {
             minutesOnField: [80, 2],
             missedGoals: [1, 0],
+            tackles: [4, 1],
+          },
+          Финал: {
+            minutesOnField: [120, 2],
+            missedGoals: [1, 0],
+            yellowCard: [1, -1],
             tackles: [4, 1],
           },
         },
@@ -405,6 +434,12 @@ export const players = {
             missedGoals: [2, -1],
             tackles: [7, 2],
           },
+          Финал: {
+            minutesOnField: [120, 2],
+            missedGoals: [1, 0],
+            tackles: [4, 1],
+            captain: true,
+          },
         },
       },
     },
@@ -437,6 +472,11 @@ export const players = {
           "1/2(2)": {
             minutesOnField: [90, 2],
             cleanSheet: [true, 4],
+            tackles: [4, 1],
+          },
+          Финал: {
+            minutesOnField: [120, 2],
+            missedGoals: [1, 0],
             tackles: [4, 1],
           },
         },
@@ -633,6 +673,10 @@ export const players = {
             cleanSheet: [true, 1],
             tackles: [1, 0],
           },
+          Финал: {
+            minutesOnField: [120, 2],
+            tackles: [4, 1],
+          },
         },
       },
     },
@@ -674,6 +718,11 @@ export const players = {
           "1/2(2)": {
             minutesOnField: [90, 2],
             tackles: [3, 1],
+          },
+          Финал: {
+            minutesOnField: [120, 2],
+            yellowCard: [1, -1],
+            tackles: [5, 1],
           },
         },
       },
@@ -773,6 +822,11 @@ export const players = {
             assists: [1, 3],
             yellowCard: [1, -1],
             tackles: [6, 2],
+          },
+          Финал: {
+            minutesOnField: [83, 2],
+            earnedPenalty: [1, 2],
+            tackles: [1, 0],
           },
         },
       },
@@ -938,6 +992,20 @@ export const players = {
         },
       },
     },
+    rice: {
+      firstName: "Деклан",
+      lastName: "Райс",
+      team: "Арсенал",
+      stats: {
+        "25/26": {
+          Финал: {
+            minutesOnField: [120, 2],
+            yellowCard: [1, -1],
+            tackles: [7, 2],
+          },
+        },
+      },
+    },
     simeone: {
       firstName: "Джулиано",
       lastName: "Симеоне",
@@ -1078,6 +1146,10 @@ export const players = {
             minutesOnField: [65, 2],
             goals: [1, 4],
             tackles: [1, 0],
+          },
+          Финал: {
+            minutesOnField: [89, 2],
+            goals: [1, 4],
           },
         },
       },

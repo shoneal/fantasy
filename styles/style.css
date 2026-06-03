@@ -701,19 +701,33 @@ main {
   background: var(--interaction);
 }
 
-.player-match {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+.player-match-wrapper {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
   height: 122px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 8px;
+  background-color: var(--primary-color);
+}
+
+.player-match {
+  display: flex;
+  grid-row-start: 2;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   font-weight: 500;
   font-size: 20px;
   line-height: 1;
-  background-color: var(--primary-color);
+}
+
+.match-post-penalties {
+  grid-row-start: 3;
+  margin-top: -4px;
+  color: var(--identifier-primary-color);
+  font-size: 12px;
+  text-align: center;
 }
 
 .team-wrapper {
@@ -1107,9 +1121,12 @@ footer svg {
     );
   }
 
-  .player-match {
+  .player-match-wrapper {
     height: 102px;
     padding: 8px var(--margin-desktop);
+  }
+
+  .player-match {
     font-size: 14px;
   }
 

@@ -568,6 +568,7 @@ const popupElements = {
   overallWrapper: content.querySelector(".overall-stats").parentElement,
   stats: content.querySelector(".match-stats"),
   overall: content.querySelector(".overall-stats"),
+  matchWrapper: content.querySelector(".player-match-wrapper"),
   teamHome: content.querySelector(".team-home"),
   teamAway: content.querySelector(".team-away"),
   homeLogo: content.querySelector(".team-home-logo"),
@@ -857,8 +858,9 @@ function displayMatchStats(matchStats) {
 function displayMatchInfo(matchStats, matchData, playerTeam) {
   if (!matchData) return;
 
-  const { teamHome, homeLogo, teamAway, awayLogo, score } = popupElements;
-  const [opponent, location, result] = matchData;
+  const { matchWrapper, teamHome, homeLogo, teamAway, awayLogo, score } =
+    popupElements;
+  const [opponent, location, result, penalties] = matchData;
 
   const updateTeam = (nameEl, logoEl, teamName) => {
     logoEl.style.opacity = "0";
@@ -876,6 +878,21 @@ function displayMatchInfo(matchStats, matchData, playerTeam) {
   }
 
   score.textContent = result;
+
+  const penaltiesEl = matchWrapper.querySelector(".match-post-penalties");
+
+  if (penalties) {
+    if (penaltiesEl) {
+      penaltiesEl.textContent = penalties;
+    } else {
+      const newPenaltiesEl = document.createElement("div");
+      newPenaltiesEl.className = "match-post-penalties";
+      newPenaltiesEl.textContent = penalties;
+      matchWrapper.appendChild(newPenaltiesEl);
+    }
+  } else if (penaltiesEl) {
+    penaltiesEl.remove();
+  }
 } // Отображение конкретного матча
 
 function generateOverallStats(data, season) {
