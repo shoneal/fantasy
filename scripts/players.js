@@ -27,6 +27,20 @@ export const players = {
         },
       },
     },
+    joanGarcia: {
+      firstName: "Жоан",
+      lastName: "Гарсия",
+      team: "Барселона",
+      stats: {
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            saves: [1, 0],
+            missedGoals: [1, 0],
+          },
+        },
+      },
+    },
     milinkovicSavic: {
       firstName: "Ваня",
       lastName: "Милинкович-Савич",
@@ -198,6 +212,20 @@ export const players = {
             missedGoals: [1, 0],
             redCard: [1, -3],
             tackles: [8, 2],
+          },
+        },
+      },
+    },
+    franca: {
+      firstName: "Уэсли",
+      lastName: "Франса",
+      team: "Рома",
+      stats: {
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+            tackles: [3, 1],
           },
         },
       },
@@ -443,6 +471,20 @@ export const players = {
         },
       },
     },
+    ryerson: {
+      firstName: "Юлиан",
+      lastName: "Райерсон",
+      team: "Боруссия Дортмунд",
+      stats: {
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            missedGoals: [2, -1],
+            tackles: [3, 1],
+          },
+        },
+      },
+    },
     saliba: {
       firstName: "Вильям",
       lastName: "Салиба",
@@ -548,6 +590,13 @@ export const players = {
             minutesOnField: [90, 2],
             cleanSheet: [true, 4],
             tackles: [9, 3],
+          },
+        },
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            missedGoals: [1, 0],
+            tackles: [5, 1],
           },
         },
       },
@@ -727,6 +776,19 @@ export const players = {
         },
       },
     },
+    kante: {
+      firstName: "Н'Голо",
+      lastName: "Канте",
+      team: "Фенербахче",
+      stats: {
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            tackles: [2, 0],
+          },
+        },
+      },
+    },
     karl: {
       firstName: "Леннарт",
       lastName: "Карль",
@@ -827,6 +889,19 @@ export const players = {
             minutesOnField: [83, 2],
             earnedPenalty: [1, 2],
             tackles: [1, 0],
+          },
+        },
+      },
+    },
+    manuKone: {
+      firstName: "Ману",
+      lastName: "Коне",
+      team: "Рома",
+      stats: {
+        "26/27": {
+          1: {
+            minutesOnField: [53, 1],
+            tackles: [4, 1],
           },
         },
       },
@@ -990,6 +1065,15 @@ export const players = {
             playerOfTheMatch: [true, 3],
           },
         },
+        "26/27": {
+          1: {
+            minutesOnField: [71, 2],
+            goals: [2, 10],
+            cleanSheet: [true, 1],
+            tackles: [2, 0],
+            playerOfTheMatch: [true, 3],
+          },
+        },
       },
     },
     rice: {
@@ -1040,6 +1124,14 @@ export const players = {
           "1/4(1)": {
             minutesOnField: [78, 2],
             tackles: [5, 1],
+          },
+        },
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            goals: [1, 5],
+            tackles: [9, 3],
+            playerOfTheMatch: [true, 3],
           },
         },
       },
@@ -1234,6 +1326,15 @@ export const players = {
             tackles: [1, 0],
           },
         },
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            goals: [2, 8],
+            yellowCard: [1, -1],
+            playerOfTheMatch: [true, 3],
+            captain: true,
+          },
+        },
       },
     },
     kane: {
@@ -1298,6 +1399,13 @@ export const players = {
             goals: [1, 4],
             tackles: [1, 0],
             captain: true,
+          },
+        },
+        "26/27": {
+          1: {
+            minutesOnField: [90, 2],
+            assists: [1, 3],
+            goals: [1, 4],
           },
         },
       },
@@ -1388,6 +1496,13 @@ export const players = {
           },
           "1/4(2)": {
             minutesOnField: [90, 2],
+            goals: [1, 4],
+            tackles: [2, 0],
+          },
+        },
+        "26/27": {
+          1: {
+            minutesOnField: [89, 2],
             goals: [1, 4],
             tackles: [2, 0],
           },
