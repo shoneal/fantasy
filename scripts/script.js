@@ -19,7 +19,7 @@ const teams = {
   Бенфика: "Benfica",
   Бетис: "Real-Betis",
   "Боруссия Дортмунд": "Borussia-Dortmund",
-  "Буде-Глимт": "Bodo-Glimt",
+  "Будё/Глимт": "Bodo-Glimt",
   Брюгге: "Brugge",
   Викинг: "Viking",
   Вильярреал: "Villarreal",
