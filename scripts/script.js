@@ -56,6 +56,7 @@ const teams = {
   Фейеноорд: "Feyenoord",
   Челси: "Chelsea",
   Шахтер: "Shakhtar",
+  Штутгарт: "Stuttgart",
   Ювентус: "Juventus",
   Юнион: "Union",
 }; // Логотипы команд
