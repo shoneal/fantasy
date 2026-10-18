@@ -154,6 +154,20 @@ export const players = {
         },
       },
     },
+    suzuki: {
+      firstName: "Зайон",
+      lastName: "Судзуки",
+      team: "Астон Вилла",
+      stats: {
+        "26/27": {
+          2: {
+            minutesOnField: [90, 2],
+            cleanSheet: [true, 4],
+            saves: [6, 2],
+          },
+        },
+      },
+    },
   },
   defenders: {
     calafiori: {
@@ -226,6 +240,12 @@ export const players = {
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             tackles: [3, 1],
+          },
+          2: {
+            minutesOnField: [90, 2],
+            missedGoals: [4, -2],
+            yellowCard: [1, -1],
+            tackles: [8, 2],
           },
         },
       },
@@ -482,6 +502,10 @@ export const players = {
             missedGoals: [2, -1],
             tackles: [3, 1],
           },
+          2: {
+            minutesOnField: [30, 1],
+            tackles: [1, 0],
+          },
         },
       },
     },
@@ -597,6 +621,11 @@ export const players = {
             minutesOnField: [90, 2],
             missedGoals: [1, 0],
             tackles: [5, 1],
+          },
+          2: {
+            minutesOnField: [28, 1],
+            missedGoals: [3, -1],
+            tackles: [2, 0],
           },
         },
       },
@@ -903,6 +932,10 @@ export const players = {
             minutesOnField: [53, 1],
             tackles: [4, 1],
           },
+          2: {
+            minutesOnField: [17, 1],
+            tackles: [1, 0],
+          },
         },
       },
     },
@@ -927,7 +960,7 @@ export const players = {
       firstName: "Джамал",
       lastName: "Мусиала",
       team: "Бавария",
-      onePhoto: true,
+      onePhoto: { "25/26": true },
       stats: {
         "25/26": {
           "1/2(1)": {
@@ -962,6 +995,7 @@ export const players = {
       firstName: "Майкл",
       lastName: "Олисе",
       team: "Бавария",
+      onePhoto: { "26/27": true },
       stats: {
         "25/26": {
           1: {
@@ -1025,6 +1059,13 @@ export const players = {
           "1/2(2)": {
             minutesOnField: [90, 2],
             tackles: [4, 1],
+          },
+        },
+        "26/27": {
+          2: {
+            minutesOnField: [74, 2],
+            yellowCard: [2, 0],
+            redCard: [1, -3],
           },
         },
       },
@@ -1103,6 +1144,21 @@ export const players = {
           "1/16(2)": {
             minutesOnField: [83, 2],
             tackles: [2, 0],
+          },
+        },
+      },
+    },
+    stiller: {
+      firstName: "Ангело",
+      lastName: "Штиллер",
+      team: "Штутгарт",
+      stats: {
+        "26/27": {
+          2: {
+            minutesOnField: [80, 2],
+            assists: [1, 3],
+            cleanSheet: [true, 1],
+            tackles: [4, 1],
           },
         },
       },
@@ -1334,6 +1390,11 @@ export const players = {
             playerOfTheMatch: [true, 3],
             captain: true,
           },
+          2: {
+            minutesOnField: [90, 2],
+            goals: [2, 8],
+            tackles: [2, 0],
+          },
         },
       },
     },
@@ -1406,6 +1467,13 @@ export const players = {
             minutesOnField: [90, 2],
             assists: [1, 3],
             goals: [1, 4],
+          },
+          2: {
+            minutesOnField: [90, 2],
+            goals: [2, 8],
+            tackles: [1, 0],
+            playerOfTheMatch: [true, 3],
+            captain: true,
           },
         },
       },
@@ -1505,6 +1573,12 @@ export const players = {
             minutesOnField: [89, 2],
             goals: [1, 4],
             tackles: [2, 0],
+          },
+          2: {
+            minutesOnField: [90, 2],
+            goals: [1, 4],
+            tackles: [3, 1],
+            outsideTheBox: [1, 1],
           },
         },
       },

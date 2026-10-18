@@ -598,7 +598,7 @@ function openPlayerPopup(data, key, season, points, badge) {
     popupElements;
 
   wrapper.classList.remove("basic", "personal");
-  wrapper.classList.add(data.onePhoto ? "basic" : "personal");
+  wrapper.classList.add(data.onePhoto?.[season] ? "basic" : "personal");
 
   const firstName = document.querySelector(".player-name-first");
   if (firstName) firstName.remove();
@@ -625,8 +625,8 @@ function openPlayerPopup(data, key, season, points, badge) {
 
   photo.style.opacity = "0";
   photo.src = `${basicLink}players/${season.replace("/", "-")}/${
-    data.onePhoto ? "basic" : "personal"
-  }/${key}.${data.onePhoto ? "jpg" : "webp"}`;
+    data.onePhoto?.[season] ? "basic" : "personal"
+  }/${key}.${data.onePhoto?.[season] ? "jpg" : "webp"}`;
   photo.alt = data.lastName;
   showImage(photo);
 
