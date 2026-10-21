@@ -377,6 +377,20 @@ export const players = {
         },
       },
     },
+    jacquet: {
+      firstName: "Жереми",
+      lastName: "Жаке",
+      team: "Ливерпуль",
+      stats: {
+        "26/27": {
+          3: {
+            minutesOnField: [74, 2],
+            missedGoals: [2, -1],
+            tackles: [6, 2],
+          },
+        },
+      },
+    },
     kounde: {
       firstName: "Жюль",
       lastName: "Кунде",
@@ -627,6 +641,11 @@ export const players = {
             missedGoals: [3, -1],
             tackles: [2, 0],
           },
+          3: {
+            minutesOnField: [90, 2],
+            missedGoals: [3, -1],
+            tackles: [6, 2],
+          },
         },
       },
     },
@@ -659,6 +678,20 @@ export const players = {
     },
   },
   midfielders: {
+    anderson: {
+      firstName: "Эллиот",
+      lastName: "Андерсон",
+      team: "Манчестер Сити",
+      stats: {
+        "26/27": {
+          3: {
+            minutesOnField: [90, 2],
+            goals: [1, 5],
+            tackles: [3, 1],
+          },
+        },
+      },
+    },
     ardaGuler: {
       lastName: "Арда Гюлер",
       team: "Реал Мадрид",
@@ -989,6 +1022,13 @@ export const players = {
             tackles: [6, 2],
           },
         },
+        "26/27": {
+          3: {
+            minutesOnField: [72, 2],
+            assists: [1, 3],
+            tackles: [3, 1],
+          },
+        },
       },
     },
     olise: {
@@ -1159,6 +1199,10 @@ export const players = {
             assists: [1, 3],
             cleanSheet: [true, 1],
             tackles: [4, 1],
+          },
+          3: {
+            minutesOnField: [90, 2],
+            tackles: [8, 2],
           },
         },
       },
@@ -1338,6 +1382,14 @@ export const players = {
         "25/26": {
           "1/16(2)": {
             minutesOnField: [90, 2],
+          },
+        },
+        "26/27": {
+          3: {
+            minutesOnField: [90, 2],
+            goals: [2, 8],
+            playerOfTheMatch: [true, 3],
+            captain: true,
           },
         },
       },
