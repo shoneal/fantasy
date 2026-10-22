@@ -165,6 +165,11 @@ export const players = {
             cleanSheet: [true, 4],
             saves: [6, 2],
           },
+          3: {
+            minutesOnField: [90, 2],
+            saves: [2, 0],
+            missedGoals: [1, 0],
+          },
         },
       },
     },
@@ -180,6 +185,18 @@ export const players = {
             minutesOnField: [90, 2],
             cleanSheet: [true, 4],
             tackles: [4, 1],
+          },
+        },
+      },
+    },
+    dimarco: {
+      firstName: "Федерико",
+      lastName: "Димарко",
+      team: "Интер",
+      stats: {
+        "26/27": {
+          3: {
+            minutesOnField: [59, 1],
           },
         },
       },
@@ -764,6 +781,20 @@ export const players = {
           4: {
             minutesOnField: [19, 1],
             tackles: [1, 0],
+          },
+        },
+      },
+    },
+    carlosForbs: {
+      lastName: "Карлуш Форбш",
+      team: "Брюгге",
+      stats: {
+        "26/27": {
+          3: {
+            minutesOnField: [82, 2],
+            goals: [1, 5],
+            cleanSheet: [true, 1],
+            tackles: [2, 0],
           },
         },
       },
@@ -1632,6 +1663,12 @@ export const players = {
             tackles: [3, 1],
             outsideTheBox: [1, 1],
           },
+          3: {
+            minutesOnField: [88, 2],
+            assists: [1, 3],
+            goals: [1, 4],
+            playerOfTheMatch: [true, 3],
+          },
         },
       },
     },
@@ -1671,6 +1708,20 @@ export const players = {
           },
           5: {
             minutesOnField: [89, 2],
+          },
+        },
+      },
+    },
+    suarez: {
+      firstName: "Луис",
+      lastName: "Суарес",
+      team: "Спортинг",
+      stats: {
+        "26/27": {
+          3: {
+            minutesOnField: [90, 2],
+            goals: [2, 8],
+            tackles: [2, 0],
           },
         },
       },
